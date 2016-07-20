@@ -1,0 +1,81 @@
+﻿<Page
+    x:Class="Studio_Professional.Views.SpecialOffersDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Studio_Professional.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="White">
+
+    <Grid Margin="0, -28, 0, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Background="Black">
+            <Image Source="ms-appx:///Resorses/Img/SpecialOffersDetails/header.jpg"
+                   Opacity="0.4"
+                   Stretch="UniformToFill"/>
+        </Border>
+        <Button x:Name="GoToBackButton"
+                Canvas.ZIndex="1"
+                Width="55"
+                Height="55"
+                VerticalAlignment="Top"
+                Margin="0, 38, 0, 0"
+                BorderThickness="0" 
+                Click="GoToBackButton_Click"
+                Style="{StaticResource ButtonTransperentBackground}">
+            <Button.Background>
+                <ImageBrush ImageSource="ms-appx:///Resorses/Img/Common/light_arrow.png"
+                            Stretch="None"
+                            AlignmentX="Center"
+                            AlignmentY="Center"/>
+            </Button.Background>
+        </Button>
+        <Border Margin="0, 83, 0, 0">
+            <TextBlock x:Name="HeaderTextBlock"
+                       Canvas.ZIndex="1"
+                       Text="Стрижка горячими ножницами в подарок"
+                       Margin="50, 0"
+                       VerticalAlignment="Center"
+                       Foreground="White"
+                       FontSize="30"
+                       FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"/>
+        </Border>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="Срок действия"
+                           Margin="0, 35, 0, 0"
+                           Foreground="Black"
+                           FontSize="20"
+                           FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                           TextAlignment="Center"/>
+                <TextBlock x:Name="TimePeriodTextBlock"
+                           Text="15.06.16-30.06.16"
+                           Margin="0, 15, 0, 0"
+                           Foreground="Black"
+                           FontSize="16"
+                           FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                           TextAlignment="Center"/>
+                <TextBlock Text="Подробнее об акции"
+                           Margin="0, 35, 0, 0"
+                           Foreground="Black"
+                           FontSize="20"
+                           FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                           TextAlignment="Center"/>
+                <TextBlock Text="При использовании горячих ножниц срез запаивается и получается гладким. Сами ножницы при этом остаются холодными, а нагревание происходит непосредственно в самой точке среза. Причем нагреваются ножницы до строго определенной темппературы, которая для каждого типа волос определяется индивидуально и программируется мастером на аппарате горяцих ножниц."
+                           Margin="50, 15, 50, 0"
+                           Foreground="Black"
+                           FontSize="12"
+                           FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                           TextWrapping="Wrap"
+                           LineHeight="16"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

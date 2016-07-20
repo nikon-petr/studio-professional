@@ -1,0 +1,153 @@
+﻿<Page
+    x:Class="Studio_Professional.Views.SpecialOffersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Studio_Professional.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="White">
+
+    <Page.Resources>
+        <Style x:Key="BaseButton" 
+               TargetType="Button" 
+               BasedOn="{StaticResource ButtonTransperentBackground}">
+            <Setter Property="Content" Value="X"/>
+            <Setter Property="Margin" Value="10, 20, 10, 0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Height" Value="160"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiLight"/>
+            <Setter Property="FontFamily" Value="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="ms-appx:///Resorses/Img/Main/special_offers.png"
+                                AlignmentX="Center"
+                                AlignmentY="Center"
+                                 Stretch="UniformToFill"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonContentTextBLock"
+               TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="LeftButton"
+               TargetType="Button"
+               BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="RightButton"
+               TargetType="Button"
+               BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.16*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="GoToBackButton"
+                Width="55"
+                Height="55"
+                VerticalAlignment="Top"
+                Margin="0, 10, 0, 0"
+                BorderThickness="0" 
+                Click="GoToBackButton_Click"
+                Style="{StaticResource ButtonTransperentBackground}">
+            <Button.Background>
+                <ImageBrush ImageSource="ms-appx:///Resorses/Img/Common/Arrow.png"
+                            Stretch="None"
+                            AlignmentX="Center"
+                            AlignmentY="Center"/>
+            </Button.Background>
+        </Button>
+        <TextBlock Text="Наши акции"
+                    Foreground="Black"
+                    FontSize="35"     
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0, 23, 0, 0"/>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Orientation="Vertical"
+                        Margin="15, -0, 15, 0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="b1"
+                            Style="{StaticResource LeftButton}"
+                            Click="b1_Click">
+                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
+                                   Style="{StaticResource ButtonContentTextBLock}"/>
+                    </Button>
+                    <Button x:Name="b2"
+                            Style="{StaticResource RightButton}">
+                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
+                                   Style="{StaticResource ButtonContentTextBLock}"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="b3"
+                            Style="{StaticResource LeftButton}">
+                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
+                                   Style="{StaticResource ButtonContentTextBLock}"/>
+                    </Button>
+                    <Button x:Name="b4"
+                            Style="{StaticResource RightButton}">
+                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
+                                   Style="{StaticResource ButtonContentTextBLock}"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="b5"
+                            Style="{StaticResource LeftButton}">
+                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
+                                   Style="{StaticResource ButtonContentTextBLock}"/>
+                    </Button>
+                    <Button x:Name="b6"
+                            Style="{StaticResource RightButton}">
+                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
+                                   Style="{StaticResource ButtonContentTextBLock}"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="b7"
+                            Style="{StaticResource LeftButton}">
+                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
+                                   Style="{StaticResource ButtonContentTextBLock}"/>
+                    </Button>
+                    <Button x:Name="b8"
+                            Style="{StaticResource RightButton}">
+                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
+                                   Style="{StaticResource ButtonContentTextBLock}"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

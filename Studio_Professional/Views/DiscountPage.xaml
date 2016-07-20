@@ -1,0 +1,88 @@
+﻿<Page
+    x:Class="Studio_Professional.Views.DiscountPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Studio_Professional.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="White">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="GoToBackButton"
+                Width="55"
+                Height="55"
+                VerticalAlignment="Top"
+                Margin="0, 10, 0, 0"
+                BorderThickness="0" 
+                Click="GoToBackButton_Click"
+                Style="{StaticResource ButtonTransperentBackground}">
+            <Button.Background>
+                <ImageBrush ImageSource="ms-appx:///Resorses/Img/Common/Arrow.png"
+                            Stretch="None"
+                            AlignmentX="Center"
+                            AlignmentY="Center"/>
+            </Button.Background>
+        </Button>
+        <TextBox Text="Моя Скидка"
+                 TextAlignment="Center"
+                 FontSize="40" 
+                 FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                 VerticalAlignment="Bottom"
+                 Margin="80, 0"/>
+        <Grid Grid.Row="1"
+              Margin="65, 0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="DiscountTextBlock"
+                       Text="10" 
+                       Foreground="#5c5c5c"
+                       FontSize="150"
+                       FontFamily="Resources/Fonts/OpenSans-Regular.ttf#Open Sans"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       CharacterSpacing="-200"/>
+            <TextBlock Grid.Column="1"
+                       Text="%"
+                       Foreground="#7b7b7b"
+                       FontSize="130" 
+                       FontFamily="Resources/Fonts/OpenSans-Regular.ttf#Open Sans"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"/>
+        </Grid>
+        <StackPanel Grid.Row="2"
+                    Orientation="Vertical"
+                    Margin="60, 0" >
+            <TextBlock Text="Действительня при наличии кода, подтверждающего ее наличие"
+                       TextAlignment="Center"
+                       Foreground="Black"
+                       FontSize="18"
+                       FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                       OpticalMarginAlignment="TrimSideBearings"                
+                       TextWrapping="Wrap"/>
+            <Button x:Name="GetDiscountButton"
+                    Content="Получить"
+                    Foreground="Black"
+                    FontWeight="Normal"
+                    FontSize="28"
+                    CharacterSpacing="-30"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    HorizontalAlignment="Center"
+                    Margin="0, 25"
+                    Padding="30, 5"
+                    Style="{StaticResource ButtonStyle1}"
+                    Click="GetDiscountButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

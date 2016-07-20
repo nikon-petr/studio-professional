@@ -1,0 +1,95 @@
+﻿<Page
+    x:Class="Studio_Professional.Views.Gallery"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Studio_Professional.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="White">
+
+    <Grid  Margin="0, -28, 0, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Image Grid.ColumnSpan="2"
+               VerticalAlignment="Top"
+               Source="ms-appx:///Resorses/Img/Common/Header.png"/>
+        <Button x:Name="GoToBackButton"
+                Width="55"
+                Height="55"
+                VerticalAlignment="Top"
+                Margin="0, 38, 0, 0"
+                BorderThickness="0" 
+                Click="GoToBackButton_Click"
+                Style="{StaticResource ButtonTransperentBackground}">
+            <Button.Background>
+                <ImageBrush ImageSource="ms-appx:///Resorses/Img/Common/Arrow.png"
+                            Stretch="None"
+                            AlignmentX="Center"
+                            AlignmentY="Center"/>
+            </Button.Background>
+        </Button>
+        <Border VerticalAlignment="Stretch">
+            <TextBlock x:Name="AppNameTextBlock"
+                       Text="Studio professional"
+                       Margin="0, 73, 0, 0"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Top"
+                       Foreground="Black"
+                       FontSize="48" 
+                       FontFamily="ms-appx:/Resorses/Fonts/GoodVibesCyr.ttf#Good Vibes Pro"/>
+        </Border>
+        <TextBlock Text="Здесь вы можете посмотреть наши работы"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Margin="0, 0, 0, 20"
+                   FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                   Foreground="Black"
+                   FontSize="15"/>
+        <Button x:Name="GoToPrevImageButton"
+                VerticalAlignment="Center"
+                Margin="0, 12, 0, 0"
+                Padding="10, 50, 30, 50"
+                Grid.Row="1"
+                BorderThickness="0"
+                Style="{StaticResource ButtonTransperentBackground}" 
+                Canvas.ZIndex="1"
+                Click="GoToPrevImageButton_Click">
+            <Image Source="ms-appx:///Resorses/Img/Gallery/left_button.png"
+                   Height="40"
+                   UseLayoutRounding="True"/>
+        </Button>
+        <Button x:Name="GoToNextImageButton"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0, 12, 0, 0"
+                Padding="30, 50, 10, 50"
+                Grid.Row="1"
+                BorderThickness="0"
+                Style="{StaticResource ButtonTransperentBackground}" 
+                Canvas.ZIndex="1"
+                Click="GoToNextImageButton_Click">
+            <Image Source="ms-appx:///Resorses/Img/Gallery/right_button.png"
+                   Height="40"
+                   UseLayoutRounding="True"/>
+        </Button>
+        <Pivot x:Name="GalleryPivot"
+                Grid.Row="1">
+            <PivotItem Margin="0">
+                <Image Source="ms-appx:///Resorses/Img/Gallery/65.jpg"
+                       Stretch="UniformToFill"/>
+            </PivotItem>
+            <PivotItem Margin="0">
+                <Image Source="ms-appx:///Resorses/Img/Gallery/66.png"
+                       Stretch="UniformToFill"/>
+            </PivotItem>
+            <PivotItem Margin="0">
+                <Image Source="ms-appx:///Resorses/Img/Gallery/67.png"
+                       Stretch="UniformToFill"/>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

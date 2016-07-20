@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Studio_Professional.Repository;
+using Studio_Professional.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,6 +29,10 @@ namespace Studio_Professional
     {
         private TransitionCollection transitions;
 
+        public static UserRepository UserRepositiry { get; } = new UserRepository("app.db");
+        public static Web.WebService WebService { get; } = new Web.WebService();
+        public static Json.Deserializer Deserializer { get; } = new Json.Deserializer();
+
         /// <summary>
         /// Инициализирует одноэлементный объект приложения.  Это первая выполняемая строка разрабатываемого
         /// кода; поэтому она является логическим эквивалентом main() или WinMain().
@@ -50,6 +56,9 @@ namespace Studio_Professional
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
+
+            //Удаляет информацию о предыдущем сеансе
+            UserRepositiry.Delete();
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
@@ -94,9 +103,19 @@ namespace Studio_Professional
                 // Если стек навигации не восстанавливается для перехода к первой странице,
                 // настройка новой страницы путем передачи необходимой информации в качестве параметра
                 // навигации
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                if (UserRepositiry.UserInfo == null)
                 {
-                    throw new Exception("Failed to create initial page");
+                    if (!rootFrame.Navigate(typeof(RegistrationPage), e.Arguments))
+                    {
+                        throw new Exception("Failed to create initial page");
+                    }
+                }
+                else
+                {
+                    if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                    {
+                        throw new Exception("Failed to create initial page");
+                    }
                 }
             }
 
@@ -126,6 +145,9 @@ namespace Studio_Professional
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
+
+            // Сохранение времени последнего входа в приложение
+            UserRepositiry.UpdateDate();
 
             // TODO: Сохранить состояние приложения и остановить все фоновые операции
             deferral.Complete();
