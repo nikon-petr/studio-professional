@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Studio_Professional.Json
+﻿namespace Studio_Professional.Json
 {
     /// <summary>
     /// Возможные стандартные ответы в json, возвращаемые Api

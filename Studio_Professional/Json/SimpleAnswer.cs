@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace Studio_Professional.Json
 {
@@ -11,7 +6,7 @@ namespace Studio_Professional.Json
     /// Простой ответ Api содержащий только одну переменную: answer
     /// </summary>
     [DataContract]
-    public class AnswerTemplate
+    public class SimpleAnswer
     {
         [DataMember(Name = "answer")]
         public string Answer;

@@ -36,7 +36,7 @@ namespace Studio_Professional.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             var webRequest = await App.WebService.UserSaleJsonResponse("79000000000");
-            var jsonObject = await App.Deserializer.Execute<AnswerTemplate>(webRequest.GetResponseStream());
+            var jsonObject = await App.Deserializer.Execute<SimpleAnswer>(webRequest.GetResponseStream());
             JsonStringTextBox.Text = jsonObject.Answer;
         }
     }

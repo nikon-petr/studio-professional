@@ -6,9 +6,132 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="White">
 
-    <Grid>
+    <Grid Margin="0, -28, 0, 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
 
+        <Image  Grid.ColumnSpan="2"
+                Width="auto"
+                VerticalAlignment="Top"
+                Source="Resorses/Img/Common/Header.png"/>
+        <Border Height="{Binding ElementName=HeadImage, Path=ActualHeight}"
+                VerticalAlignment="Stretch"
+                Grid.ColumnSpan="2">
+            <TextBlock x:Name="AppNameTextBlock"
+                       Text="Studio professional"
+                       Margin="0, 73, 0, 0"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Top"
+                       Foreground="Black"
+                       FontSize="48" 
+                       FontFamily="Resorses/Fonts/GoodVibesCyr.ttf#Good Vibes Pro"/>
+        </Border>
+
+        <Button x:Name="GoToAboutButton"
+                Grid.Row="1"
+                Content="О салоне"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="10"
+                Width="160"
+                Height="160"
+                BorderThickness="0" 
+                FontSize="25"
+                FontWeight="Normal"
+                FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                Style="{StaticResource ButtonTransperentBackground}"
+                Click="GoToAboutButton_Click">
+            <Button.Background>
+                <ImageBrush
+                    ImageSource="Resorses/Img/Main/about.png"
+                    AlignmentX="Center"
+                    AlignmentY="Center"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="GoToDiscountButton"
+                Grid.Row="1"
+                Grid.Column="1"
+                Content="Моя скидка"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="10"
+                Width="160"
+                Height="160"
+                BorderThickness="0"
+                FontSize="25"
+                FontWeight="Normal"
+                FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                Style="{StaticResource ButtonTransperentBackground}"
+                Click="GoToDiscountButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Resorses/Img/Main/discount.png"
+                            AlignmentX="Center"
+                            AlignmentY="Center"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="GoToSpetialOffersButton"
+                Grid.Row="2"
+                Content="Акции"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                BorderThickness="0" 
+                Margin="10"
+                Width="160"
+                Height="160"
+                FontSize="25"
+                FontWeight="Normal"
+                FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                Click="GoToSpetialOffersButton_Click"
+                Style="{StaticResource ButtonTransperentBackground}">
+            <Button.Background>
+                <ImageBrush
+                    ImageSource="Resorses/Img/Main/special_offers.png"
+                    AlignmentX="Center"
+                    AlignmentY="Center"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="GoToGalleryButton"
+                Grid.Row="2"
+                Grid.Column="1"
+                Content="Галерея"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="10"
+                Width="160"
+                Height="160"
+                BorderThickness="0" 
+                FontSize="25"
+                FontWeight="Normal"
+                FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                Style="{StaticResource ButtonTransperentBackground}"
+                Click="GoToGalleryButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Resorses/Img/Main/gallery.png"
+                            AlignmentX="Center"
+                            AlignmentY="Center"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="RequesCall"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Foreground="Black"
+                FontSize="25"
+                FontWeight="Normal"
+                Content="Заказать звонок"
+                Style="{StaticResource ButtonStyle1}"/>
     </Grid>
 </Page>

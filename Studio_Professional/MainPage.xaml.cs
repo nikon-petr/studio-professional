@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Studio_Professional.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,7 +27,8 @@ namespace Studio_Professional
         {
             this.InitializeComponent();
 
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         /// <summary>
@@ -43,6 +45,26 @@ namespace Studio_Professional
             // событие Windows.Phone.UI.Input.HardwareButtons.BackPressed.
             // Если вы используете NavigationHelper, предоставляемый некоторыми шаблонами,
             // данное событие обрабатывается для вас.
+        }
+
+        private void GoToAboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AboutPage), null);
+        }
+
+        private void GoToDiscountButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(DiscountPage));
+        }
+
+        private void GoToSpetialOffersButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SpecialOffersPage));
+        }
+
+        private void GoToGalleryButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Gallery));
         }
     }
 }
