@@ -12,6 +12,7 @@
                     AlignmentY="Center">
         </ImageBrush>
     </Page.Background>
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -44,8 +45,18 @@
                     <Image Source="ms-appx:///Resorses/Img/Login/name_icon.png"
                            Height="18"
                            VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1"
+                               Visibility="Collapsed"
+                               Text="+"
+                               Margin="0"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="White"
+                               FontSize="20"
+                               FontWeight="Light"
+                               FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow" />
                     <TextBox x:Name="NameTextBox"
-                             Grid.Column="1"
+                             Grid.Column="2"
                              PlaceholderText="Ваше имя"
                              Margin="0"
                              BorderThickness="0"
@@ -54,23 +65,39 @@
                              FontSize="20"
                              FontWeight="Light"
                              FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow" 
-                             Style="{StaticResource TextBoxStyle1}"/>
+                             Style="{StaticResource TextBoxStyle1}" 
+                             LostFocus="NameTextBox_LostFocus" KeyDown="NameTextBox_KeyDown"/>
                 </Grid>
             </Border>
+            <TextBlock x:Name="NameValidationMessage"
+                       Visibility="Collapsed"
+                       Margin="2, 2, 2, -20"/>
             <Border  BorderBrush="White"
                      BorderThickness="0, 0, 0, 2" 
                      HorizontalAlignment="Stretch" 
                      Margin="0, 65, 0, 0">
-                <Grid>
+                <Grid x:Name="PhoneGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.07*"/>
+                        <ColumnDefinition Width="0"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Image Source="ms-appx:///Resorses/Img/Login/number_icon.png"
                            Height="18"
                            VerticalAlignment="Center"/>
+                    <TextBlock x:Name="PlusSymbloTextBox"
+                               Grid.Column="1"
+                               Visibility="Collapsed"
+                               Text="+"
+                               Margin="0"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="White"
+                               FontSize="20"
+                               FontWeight="Light"
+                               FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow" />
                     <TextBox x:Name="NumberTextBox"
-                             Grid.Column="1"
+                             Grid.Column="2"
                              PlaceholderText="Ваш телефон"
                              Margin="0"
                              BorderThickness="0"
@@ -81,10 +108,14 @@
                              FontWeight="Light"
                              InputScope="TelephoneNumber"
                              FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow" 
-                             Style="{StaticResource TextBoxStyle1}"/>
-
+                             Style="{StaticResource TextBoxStyle1}" 
+                             LostFocus="NumberTextBox_LostFocus" GotFocus="NumberTextBox_GotFocus"/>
                 </Grid>
             </Border>
+
+            <TextBlock x:Name="PhoneValidationMessage"
+                       Visibility="Collapsed"
+                       Margin="2"/>
         </StackPanel>
 
         <Button x:Name="SubmitButton"
