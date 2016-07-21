@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Studio_Professional.Repository
 {
+    /// <summary>
+    /// Предоставляет доступ к локальной базе данных
+    /// </summary>
     public class UserRepository
     {
         private SQLiteConnection connection;
@@ -19,6 +22,9 @@ namespace Studio_Professional.Repository
             CreateTable();
         }
 
+        /// <summary>
+        /// Предоставляет доступ и хранит информацию о пользователе
+        /// </summary>
         public User UserInfo
         {
             get
@@ -32,6 +38,9 @@ namespace Studio_Professional.Repository
             }
         }
 
+        /// <summary>
+        /// Создает таблицу User в базе данных, если еще не создана
+        /// </summary>
         private void CreateTable()
         {
             string query = @"CREATE TABLE IF NOT EXISTS
@@ -44,6 +53,10 @@ namespace Studio_Professional.Repository
             }
         }
 
+        /// <summary>
+        /// Получает информацию о пользователе из базы данных
+        /// </summary>
+        /// <returns></returns>
         private User GetUser()
         {
             using (var statement = connection.Prepare("SELECT Name, Number, LastLogin FROM User"))
@@ -61,6 +74,9 @@ namespace Studio_Professional.Repository
             }
         }
 
+        /// <summary>
+        /// Вставляет данные о пользователе в базу
+        /// </summary>
         public void Insert(User user)
         {
             using (var statement = connection.Prepare("INSERT INTO User(Name, Number, LastLogin) VALUES(?, ?, ?)"))
@@ -72,6 +88,9 @@ namespace Studio_Professional.Repository
             }
         }
 
+        /// <summary>
+        /// Обновляет дату последнего входа в приложение
+        /// </summary>
         public void UpdateDate()
         {
             using (var statement = connection.Prepare("UPDATE User Set LastLogin=? WHERE Number=?"))
@@ -82,6 +101,9 @@ namespace Studio_Professional.Repository
             }
         }
 
+        /// <summary>
+        /// Удаляет данные о текущем пользователе
+        /// </summary>
         public void Delete()
         {
             if (UserInfo != null)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Studio_Professional.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,8 +33,11 @@ namespace Studio_Professional.Views
         /// </summary>
         /// <param name="e">Данные события, описывающие, каким образом была достигнута эта страница.
         /// Этот параметр обычно используется для настройки страницы.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            var webRequest = await App.WebService.UserSaleJsonResponse("79000000000");
+            var jsonObject = await App.Deserializer.Execute<AnswerTemplate>(webRequest.GetResponseStream());
+            JsonStringTextBox.Text = jsonObject.Answer;
         }
     }
 }

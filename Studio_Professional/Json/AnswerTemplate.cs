@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace Studio_Professional.Json
 {
+    /// <summary>
+    /// Простой ответ Api содержащий только одну переменную: answer
+    /// </summary>
     [DataContract]
     public class AnswerTemplate
     {
-        [DataMember]
+        [DataMember(Name = "answer")]
         public string Answer;
     }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Studio_Professional.Json
 {
+    /// <summary>
+    /// Возможные стандартные ответы в json, возвращаемые Api
+    /// </summary>
     public sealed class JsonAnswers
     {
         public static string OK { get; } = "OK";

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Studio_Professional.Models
 {
+    /// <summary>
+    /// Иоель данных пользователя
+    /// </summary>
     public class User
     {
         public string Name { get; set; }

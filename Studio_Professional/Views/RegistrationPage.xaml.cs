@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Studio_Professional.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,6 +35,17 @@ namespace Studio_Professional.Views
         /// Этот параметр обычно используется для настройки страницы.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.UserRepositiry.Insert(new User
+            {
+                Name = NameTextBox.Text,
+                Number = NumberTextBox.Text,
+                LastLogin = DateTime.UtcNow
+            });
+            Frame.Navigate(typeof(TestPage));
         }
     }
 }
