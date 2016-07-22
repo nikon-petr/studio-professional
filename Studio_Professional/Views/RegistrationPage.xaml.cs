@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента пустой страницы см. по адресу http://go.microsoft.com/fwlink/?LinkID=390556
@@ -24,12 +25,22 @@ namespace Studio_Professional.Views
     /// </summary>
     public sealed partial class RegistrationPage : Page
     {
+        private Storyboard NameMessageFlipStoryboard;
+        private Storyboard NameMessageFlipBackStoyboard;
+        private Storyboard NumberMessageFlipStoryboard;
+        private Storyboard NumberMessageFlipBackStoyboard;
+
         private bool IsNumberValidated { get; set; } = false;
         private bool IsNameValidated { get; set; } = false;
 
         public RegistrationPage()
         {
             this.InitializeComponent();
+
+            NameMessageFlipStoryboard = NameValidationMessage.Resources["flipStoryBoard"] as Storyboard;
+            NameMessageFlipBackStoyboard = NameValidationMessage.Resources["flipBackStoryBoard"] as Storyboard;
+            NumberMessageFlipStoryboard = PhoneValidationMessage.Resources["flipStoryBoard"] as Storyboard;
+            NumberMessageFlipBackStoyboard = PhoneValidationMessage.Resources["flipBackStoryBoard"] as Storyboard;
         }
 
         /// <summary>
@@ -70,24 +81,26 @@ namespace Studio_Professional.Views
         {
             if (NumberTextBox.Text.Length != 11)
             {
+                Storyboard storyboard = NumberMessageFlipStoryboard;
+                storyboard.Begin();
                 VibrationDevice vibration = VibrationDevice.GetDefault();
                 vibration.Vibrate(TimeSpan.FromMilliseconds(30));
                 PhoneValidationMessage.Text = "Номер набран не полностью";
-                PhoneValidationMessage.Visibility = Visibility.Visible;
                 IsNumberValidated = false;
             }
-            else if (NumberTextBox.Text[0] != '7' && NumberTextBox.Text[1] != '9')
+            else if (NumberTextBox.Text[0] != '7' || NumberTextBox.Text[1] != '9')
             {
+                Storyboard storyboard = NumberMessageFlipStoryboard;
+                storyboard.Begin();
                 VibrationDevice vibration = VibrationDevice.GetDefault();
                 vibration.Vibrate(TimeSpan.FromMilliseconds(30));
                 PhoneValidationMessage.Text = "Неверный формат ввода номера";
-                PhoneValidationMessage.Visibility = Visibility.Visible;
                 IsNumberValidated = false;
             }
             else
             {
-                PhoneValidationMessage.Text = String.Empty;
-                PhoneValidationMessage.Visibility = Visibility.Collapsed;
+                Storyboard storyboard = NumberMessageFlipBackStoyboard;
+                storyboard.Begin();
                 IsNumberValidated = true;
             }
             if (NumberTextBox.Text.Length == 0)
@@ -109,17 +122,18 @@ namespace Studio_Professional.Views
         {
             if(NameTextBox.Text.Length == 0)
             {
+                Storyboard storyboard = NameMessageFlipStoryboard;
+                storyboard.Begin();
                 VibrationDevice vibration = VibrationDevice.GetDefault();
                 vibration.Vibrate(TimeSpan.FromMilliseconds(30));
                 IsNameValidated = false;
                 NameValidationMessage.Text = "Введите имя";
-                NameValidationMessage.Visibility = Visibility.Visible;
             }
             else
             {
+                Storyboard storyboard = NameMessageFlipBackStoyboard;
+                storyboard.Begin();
                 IsNameValidated = true;
-                NameValidationMessage.Text = String.Empty;
-                NameValidationMessage.Visibility = Visibility.Collapsed;
             }
         }
     }

@@ -12,6 +12,9 @@
                     AlignmentY="Center">
         </ImageBrush>
     </Page.Background>
+    <Page.Resources>
+        
+    </Page.Resources>
     
 
     <Grid>
@@ -54,7 +57,11 @@
                                Foreground="White"
                                FontSize="20"
                                FontWeight="Light"
-                               FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow" />
+                               FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform x:Name="rtTransform"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
                     <TextBox x:Name="NameTextBox"
                              Grid.Column="2"
                              PlaceholderText="Ваше имя"
@@ -70,12 +77,58 @@
                 </Grid>
             </Border>
             <TextBlock x:Name="NameValidationMessage"
-                       Visibility="Collapsed"
-                       Margin="2, 2, 2, -20"/>
+                       TextAlignment="Center"
+                       Opacity="0"
+                       Margin="2">
+                <TextBlock.Projection>
+                    <PlaneProjection x:Name="projectionName"
+                                     CenterOfRotationX="0.5"/>
+                </TextBlock.Projection>
+                <TextBlock.Resources>
+                    <Storyboard x:Key="flipStoryBoard">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="projectionName"
+                                           Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="-90"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BounceEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="NameValidationMessage"
+                                                       Storyboard.TargetProperty="Opacity">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="1">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <QuinticEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                    <Storyboard x:Key="flipBackStoryBoard">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="projectionName"
+                                           Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <QuinticEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="NameValidationMessage"
+                                                       Storyboard.TargetProperty="Opacity">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <QuinticEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </TextBlock.Resources>
+            </TextBlock>
             <Border  BorderBrush="White"
                      BorderThickness="0, 0, 0, 2" 
                      HorizontalAlignment="Stretch" 
-                     Margin="0, 65, 0, 0">
+                     Margin="0, 45, 0, 0">
                 <Grid x:Name="PhoneGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.07*"/>
@@ -112,12 +165,56 @@
                              LostFocus="NumberTextBox_LostFocus" GotFocus="NumberTextBox_GotFocus"/>
                 </Grid>
             </Border>
-
             <TextBlock x:Name="PhoneValidationMessage"
-                       Visibility="Collapsed"
-                       Margin="2"/>
+                       TextAlignment="Center"
+                       Opacity="0"
+                       Margin="2">
+                <TextBlock.Projection>
+                    <PlaneProjection x:Name="projectionPhone"
+                                     CenterOfRotationX="0.5"/>
+                </TextBlock.Projection>
+                <TextBlock.Resources>
+                    <Storyboard x:Key="flipStoryBoard">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="projectionPhone"
+                                           Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="-90"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BounceEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PhoneValidationMessage"
+                                                       Storyboard.TargetProperty="Opacity">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="1">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <QuinticEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                    <Storyboard x:Key="flipBackStoryBoard">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="projectionPhone"
+                                           Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <QuinticEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PhoneValidationMessage"
+                                                       Storyboard.TargetProperty="Opacity">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <QuinticEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </TextBlock.Resources>
+            </TextBlock>
         </StackPanel>
-
         <Button x:Name="SubmitButton"
                 Grid.Row="2"
                 Content="Далее"
