@@ -16,16 +16,16 @@ namespace Studio_Professional.Repository
         private SQLiteConnection connection;
         private User userInfo;
 
-        public UserRepository(string name)
+        public UserRepository(SQLiteConnection connection)
         {
-            connection = new SQLiteConnection(name);
+            this.connection = connection;
             CreateTable();
         }
 
         /// <summary>
         /// Предоставляет доступ и хранит информацию о пользователе во время выполнения приложения
         /// </summary>
-        public User UserInfo
+        public User Data
         {
             get
             {
@@ -96,7 +96,7 @@ namespace Studio_Professional.Repository
             using (var statement = connection.Prepare("UPDATE User Set LastLogin=? WHERE Number=?"))
             {
                 statement.Bind(1, DateTime.Now.Ticks);
-                statement.Bind(2, UserInfo.Number);
+                statement.Bind(2, Data.Number);
                 statement.Step();
             }
         }
@@ -106,11 +106,11 @@ namespace Studio_Professional.Repository
         /// </summary>
         public void Delete()
         {
-            if (UserInfo != null)
+            if (Data != null)
             {
                 using (var statement = connection.Prepare("DELETE FROM User WHERE Number=?"))
                 {
-                    statement.Bind(1, UserInfo.Number);
+                    statement.Bind(1, Data.Number);
                     statement.Step();
                     userInfo = null;
                 }

@@ -29,7 +29,7 @@ namespace Studio_Professional
     {
         private TransitionCollection transitions;
 
-        public static UserRepository UserRepositiry { get; } = new UserRepository("app.db");
+        public static AppRepository AppRepository { get; } = new AppRepository();
         public static Web.WebService WebService { get; } = new Web.WebService();
         public static Json.Deserializer Deserializer { get; } = new Json.Deserializer();
 
@@ -58,7 +58,7 @@ namespace Studio_Professional
             }
 
             //Удаляет информацию о предыдущем сеансе
-            UserRepositiry.Delete();
+            AppRepository.User.Delete();
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
@@ -103,7 +103,7 @@ namespace Studio_Professional
                 // Если стек навигации не восстанавливается для перехода к первой странице,
                 // настройка новой страницы путем передачи необходимой информации в качестве параметра
                 // навигации
-                if (UserRepositiry.UserInfo == null)
+                if (AppRepository.User.Data == null)
                 {
                     if (!rootFrame.Navigate(typeof(RegistrationPage), e.Arguments))
                     {
@@ -147,7 +147,7 @@ namespace Studio_Professional
             var deferral = e.SuspendingOperation.GetDeferral();
 
             // Сохранение времени последнего входа в приложение
-            UserRepositiry.UpdateDate();
+            AppRepository.User.UpdateDate();
 
             // TODO: Сохранить состояние приложения и остановить все фоновые операции
             deferral.Complete();
