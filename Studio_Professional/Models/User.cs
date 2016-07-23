@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Studio_Professional.Models
 {
     /// <summary>
-    /// Иоель данных пользователя
+    /// Моель данных пользователя
     /// </summary>
     public class User
     {
