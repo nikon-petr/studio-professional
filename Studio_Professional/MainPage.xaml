@@ -36,9 +36,93 @@
                        FontSize="48" 
                        FontFamily="Resorses/Fonts/GoodVibesCyr.ttf#Good Vibes Pro"/>
         </Border>
+        <Grid Grid.ColumnSpan="2"
+              Grid.RowSpan="3"
+              Grid.Row="1">
+            <Grid.Projection>
+                <PlaneProjection x:Name="projection" />
+            </Grid.Projection>
+            <Grid x:Name="MainContentGrid"
+              Background="White"
+              Canvas.ZIndex="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Storyboard x:Key="flipFromMainToFirst">
+                        <DoubleAnimationUsingKeyFrames
+                             Storyboard.TargetName="projection"
+                             Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <PowerEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="-90" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BackEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
 
-        <Button x:Name="GoToAboutButton"
-                Grid.Row="1"
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="MainContentGrid"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="1" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="0" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepOne"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="1" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+
+                    <Storyboard x:Key="flipFromFirstToMain">
+                        <DoubleAnimationUsingKeyFrames
+                             Storyboard.TargetName="projection"
+                             Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <PowerEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="90" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BackEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="MainContentGrid"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="1" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepOne"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="1" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="0" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </Grid.Resources>
+                <Button x:Name="GoToAboutButton"
+                Grid.Row="0"
                 Content="О салоне"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right"
@@ -51,15 +135,15 @@
                 FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                 Style="{StaticResource ButtonTransperentBackground}"
                 Click="GoToAboutButton_Click">
-            <Button.Background>
-                <ImageBrush
+                    <Button.Background>
+                        <ImageBrush
                     ImageSource="Resorses/Img/Main/about.png"
                     AlignmentX="Center"
                     AlignmentY="Center"/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="GoToDiscountButton"
-                Grid.Row="1"
+                    </Button.Background>
+                </Button>
+                <Button x:Name="GoToDiscountButton"
+                Grid.Row="0"
                 Grid.Column="1"
                 Content="Моя скидка"
                 HorizontalAlignment="Left"
@@ -73,14 +157,14 @@
                 FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                 Style="{StaticResource ButtonTransperentBackground}"
                 Click="GoToDiscountButton_Click">
-            <Button.Background>
-                <ImageBrush ImageSource="Resorses/Img/Main/discount.png"
+                    <Button.Background>
+                        <ImageBrush ImageSource="Resorses/Img/Main/discount.png"
                             AlignmentX="Center"
                             AlignmentY="Center"/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="GoToSpetialOffersButton"
-                Grid.Row="2"
+                    </Button.Background>
+                </Button>
+                <Button x:Name="GoToSpetialOffersButton"
+                Grid.Row="1"
                 Content="Акции"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
@@ -93,15 +177,15 @@
                 FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                 Click="GoToSpetialOffersButton_Click"
                 Style="{StaticResource ButtonTransperentBackground}">
-            <Button.Background>
-                <ImageBrush
+                    <Button.Background>
+                        <ImageBrush
                     ImageSource="Resorses/Img/Main/special_offers.png"
                     AlignmentX="Center"
                     AlignmentY="Center"/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="GoToGalleryButton"
-                Grid.Row="2"
+                    </Button.Background>
+                </Button>
+                <Button x:Name="GoToGalleryButton"
+                Grid.Row="1"
                 Grid.Column="1"
                 Content="Галерея"
                 VerticalAlignment="Top"
@@ -115,23 +199,312 @@
                 FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                 Style="{StaticResource ButtonTransperentBackground}"
                 Click="GoToGalleryButton_Click">
-            <Button.Background>
-                <ImageBrush ImageSource="Resorses/Img/Main/gallery.png"
+                    <Button.Background>
+                        <ImageBrush ImageSource="Resorses/Img/Main/gallery.png"
                             AlignmentX="Center"
                             AlignmentY="Center"/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="RequesCall"
+                    </Button.Background>
+                </Button>
+                <Button x:Name="RequesCall"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Foreground="Black"
+                FontSize="25"
+                FontWeight="Normal"
+                Content="Заказать звонок"
+                Style="{StaticResource ButtonStyle1}"
+                Click="RequesCall_Click"/>
+            </Grid>
+
+            <Grid x:Name="RequestCallStepOne"
+              Background="White"
+              Canvas.ZIndex="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Storyboard x:Key="flipFromMainToFirst">
+                        <DoubleAnimationUsingKeyFrames
+                             Storyboard.TargetName="projection"
+                             Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <PowerEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="-90" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BackEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepOne"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="1" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="0" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepTwo"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="1" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+
+                    <Storyboard x:Key="flipFromFirstToMain">
+                        <DoubleAnimationUsingKeyFrames
+                             Storyboard.TargetName="projection"
+                             Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <PowerEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="90" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BackEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepOne"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="1" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepTwo"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="1" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="0" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </Grid.Resources>
+                <TextBlock Text="Категории"
+                       Foreground="Black"
+                       FontSize="25"
+                       TextAlignment="Center"
+                       Padding="15"/>
+                <ScrollViewer Grid.Row="1">
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="Button" x:Key="ListItem">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontSize" Value="17"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="15, 0"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button x:Name="category1"
+                            Style ="{StaticResource ListItem}">
+                            <TextBlock Text="Категория 1"/>
+                        </Button>
+                        <Button x:Name="category2"
+                            Style="{StaticResource ListItem}">
+                            <TextBlock Text="Категория 2"/>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <Grid x:Name="RequestCallStepTwo"
+              Background="White"
+              Canvas.ZIndex="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Storyboard x:Key="flipFromSecondToThird">
+                        <DoubleAnimationUsingKeyFrames
+                             Storyboard.TargetName="projection"
+                             Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <PowerEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="-90" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BackEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepTwo"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="1" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="0" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepThree"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="1" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+
+                    <Storyboard x:Key="flipFromThirdToSecond">
+                        <DoubleAnimationUsingKeyFrames
+                             Storyboard.TargetName="projection"
+                             Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <PowerEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="90" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BackEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepTwo"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="1" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepThree"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="1" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="0" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </Grid.Resources>
+                <TextBlock Text="Мастера"
+                       Foreground="Black"
+                       FontSize="25"
+                       TextAlignment="Center"
+                       Padding="15"/>
+                <ScrollViewer Grid.Row="1">
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="Button" x:Key="ListItem">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontSize" Value="17"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="15, 0"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button x:Name="master1"
+                            Style ="{StaticResource ListItem}">
+                            <TextBlock Text="Мастер 1"/>
+                        </Button>
+                        <Button x:Name="master2"
+                            Style="{StaticResource ListItem}">
+                            <TextBlock Text="Мастер 2"/>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <Grid x:Name="RequestCallStepThree"
+              Background="White"
+              Canvas.ZIndex="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Storyboard x:Key="flipFromThirdToMain">
+                        <DoubleAnimationUsingKeyFrames
+                             Storyboard.TargetName="projection"
+                             Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <PowerEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="-90" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BackEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="RequestCallStepThree"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="1" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="0" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames
+                             Storyboard.TargetName="MainContentGrid"
+                             Storyboard.TargetProperty="(Canvas.ZIndex)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="1" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </Grid.Resources>
+                <TextBlock Foreground="Black"
+                       FontSize="25"
+                       TextAlignment="Center"
+                       Padding="15"/>
+                <DatePicker x:Name="TargetDatePicker"
+                        Grid.Row="1"
+                        Header="Дата"
+                        Foreground="Black"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Style="{StaticResource DatePickerLarge}" RequestedTheme="Light"/>
+                <TextBox x:Name="DescriptionTextBox"
+                     BorderBrush="Black"
+                     BorderThickness="2"
+                     Grid.Row="2"
+                     Margin="90, 15"
+                     TextWrapping="Wrap" 
+                     PlaceholderText="Описание" 
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     VerticalAlignment="Stretch"/>
+                <Button x:Name="SubmitButton"
                 Grid.Row="3"
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 BorderBrush="Black"
-                BorderThickness="1"
+                BorderThickness="2"
                 Foreground="Black"
                 FontSize="25"
                 FontWeight="Normal"
-                Content="Заказать звонок"
-                Style="{StaticResource ButtonStyle1}"/>
+                Content="Подтвердить"
+                Style="{StaticResource ButtonStyle1}"
+                Click="SubmitButton_Click"/>
+            </Grid>
+        </Grid>
+        
     </Grid>
 </Page>

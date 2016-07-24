@@ -401,6 +401,23 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="DatePickerLarge" TargetType="DatePicker">
+            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ContentControlFontSize}"/>
+            <Setter Property="Foreground" Value="{ThemeResource DatePickerForegroundThemeBrush}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DatePicker">
+                        <StackPanel x:Name="LayoutRoot" Margin="{TemplateBinding Padding}">
+                            <ContentPresenter x:Name="HeaderContentPresenter" Foreground="Black" HorizontalAlignment="Center" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Margin="0,0,0,-3" Style="{StaticResource HeaderContentPresenterStyle}"/>
+                            <Button x:Name="FlyoutButton" FontSize="40" BorderBrush="{TemplateBinding Foreground}" BorderThickness="0" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsEnabled="{TemplateBinding IsEnabled}" Padding="6.5,0,0,3"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 
 </Application>

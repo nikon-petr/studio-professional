@@ -6,12 +6,14 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу http://go.microsoft.com/fwlink/?LinkId=391641
@@ -23,12 +25,20 @@ namespace Studio_Professional
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private Storyboard flipFromMainToFirst, flipFromFirstToMain;
+
+        private DialogStep PageState = DialogStep.Main;
+
         public MainPage()
         {
             this.InitializeComponent();
 
             Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
             NavigationCacheMode = NavigationCacheMode.Required;
+
+
+            flipFromMainToFirst = MainContentGrid.Resources["flipFromMainToFirst"] as Storyboard;
+            flipFromFirstToMain = MainContentGrid.Resources["flipFromFirstToMain"] as Storyboard;
         }
 
         /// <summary>
@@ -38,13 +48,22 @@ namespace Studio_Professional
         /// Этот параметр обычно используется для настройки страницы.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: Подготовьте здесь страницу для отображения.
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+        }
 
-            // TODO: Если приложение содержит несколько страниц, обеспечьте
-            // обработку нажатия аппаратной кнопки "Назад", выполнив регистрацию на
-            // событие Windows.Phone.UI.Input.HardwareButtons.BackPressed.
-            // Если вы используете NavigationHelper, предоставляемый некоторыми шаблонами,
-            // данное событие обрабатывается для вас.
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            if(PageState == DialogStep.FirstStep)
+            {
+                flipFromFirstToMain.Begin();
+                PageState = DialogStep.Main;
+                e.Handled = true;
+            }
         }
 
         private void GoToAboutButton_Click(object sender, RoutedEventArgs e)
@@ -66,5 +85,27 @@ namespace Studio_Professional
         {
             Frame.Navigate(typeof(Gallery));
         }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void RequesCall_Click(object sender, RoutedEventArgs e)
+        {
+            if(PageState == DialogStep.Main)
+            {
+                flipFromMainToFirst.Begin();
+                PageState = DialogStep.FirstStep;
+            }
+        }
+    }
+
+    enum DialogStep
+    {
+        Main,
+        FirstStep,
+        SecondStep,
+        ThirdStep
     }
 }

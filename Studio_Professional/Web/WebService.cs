@@ -59,6 +59,7 @@ namespace Studio_Professional.Web
                 .Uri);
         }
 
+        /// CHECKED
         /// <summary>
         /// Асинхронный метод инициирует запрос к скриту GetMySale.php
         /// </summary>

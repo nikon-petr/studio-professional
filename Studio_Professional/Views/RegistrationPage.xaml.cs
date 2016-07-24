@@ -60,13 +60,13 @@ namespace Studio_Professional.Views
                 vibration.Vibrate(TimeSpan.FromMilliseconds(30));
                 return;
             }
-            App.UserRepositiry.Insert(new User
+            App.AppRepository.User.Insert(new User
             {
                 Name = NameTextBox.Text,
                 Number = NumberTextBox.Text,
                 LastLogin = DateTime.UtcNow
             });
-            Frame.Navigate(typeof(TestPage));
+            Frame.Navigate(typeof(MainPage));
         }
 
         private void NameTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
