@@ -122,113 +122,106 @@
                     </Storyboard>
                 </Grid.Resources>
                 <Button x:Name="GoToAboutButton"
-                Grid.Row="0"
-                Content="О салоне"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                Margin="10"
-                Width="160"
-                Height="160"
-                BorderThickness="0" 
-                FontSize="25"
-                FontWeight="Normal"
-                FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
-                Style="{StaticResource ButtonTransperentBackground}"
+                        Grid.Row="0"
+                        Content="О салоне"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right"
+                        Margin="10"
+                        Width="160"
+                        Height="160"
+                        BorderThickness="0" 
+                        FontSize="25"
+                        FontWeight="Normal"
+                        FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                        Style="{StaticResource ButtonTransperentBackground}"
                 Click="GoToAboutButton_Click">
                     <Button.Background>
                         <ImageBrush
-                    ImageSource="Resorses/Img/Main/about.png"
-                    AlignmentX="Center"
-                    AlignmentY="Center"/>
+                    ImageSource="Resorses/Img/Main/about.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="GoToDiscountButton"
-                Grid.Row="0"
-                Grid.Column="1"
-                Content="Моя скидка"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Margin="10"
-                Width="160"
-                Height="160"
-                BorderThickness="0"
-                FontSize="25"
-                FontWeight="Normal"
-                FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
-                Style="{StaticResource ButtonTransperentBackground}"
-                Click="GoToDiscountButton_Click">
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Content="Моя скидка"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="10"
+                        Width="160"
+                        Height="160"
+                        BorderThickness="0"
+                        FontSize="25"
+                        FontWeight="Normal"
+                        FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                        Style="{StaticResource ButtonTransperentBackground}"
+                        Click="GoToDiscountButton_Click">
                     <Button.Background>
-                        <ImageBrush ImageSource="Resorses/Img/Main/discount.png"
-                            AlignmentX="Center"
-                            AlignmentY="Center"/>
+                        <ImageBrush ImageSource="Resorses/Img/Main/discount.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="GoToSpetialOffersButton"
-                Grid.Row="1"
-                Content="Акции"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                BorderThickness="0" 
-                Margin="10"
-                Width="160"
-                Height="160"
-                FontSize="25"
-                FontWeight="Normal"
-                FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
-                Click="GoToSpetialOffersButton_Click"
+                        Grid.Row="1"
+                        Content="Акции"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        BorderThickness="0" 
+                        Margin="10"
+                        Width="160"
+                        Height="160"
+                        FontSize="25"
+                        FontWeight="Normal"
+                        FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                        Click="GoToSpetialOffersButton_Click"
                 Style="{StaticResource ButtonTransperentBackground}">
                     <Button.Background>
-                        <ImageBrush
-                    ImageSource="Resorses/Img/Main/special_offers.png"
-                    AlignmentX="Center"
-                    AlignmentY="Center"/>
+                        <ImageBrush ImageSource="Resorses/Img/Main/special_offers.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="GoToGalleryButton"
-                Grid.Row="1"
-                Grid.Column="1"
-                Content="Галерея"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Margin="10"
-                Width="160"
-                Height="160"
-                BorderThickness="0" 
-                FontSize="25"
-                FontWeight="Normal"
-                FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
-                Style="{StaticResource ButtonTransperentBackground}"
-                Click="GoToGalleryButton_Click">
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Content="Галерея"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="10"
+                        Width="160"
+                        Height="160"
+                        BorderThickness="0" 
+                        FontSize="25"
+                        FontWeight="Normal"
+                        FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                        Style="{StaticResource ButtonTransperentBackground}"
+                        Click="GoToGalleryButton_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="Resorses/Img/Main/gallery.png"
-                            AlignmentX="Center"
-                            AlignmentY="Center"/>
+                                    AlignmentX="Center"
+                                    AlignmentY="Center"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="RequesCall"
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                BorderBrush="Black"
-                BorderThickness="2"
-                Foreground="Black"
-                FontSize="25"
-                FontWeight="Normal"
-                Content="Заказать звонок"
-                Style="{StaticResource ButtonStyle1}"
-                Click="RequesCall_Click"/>
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        Foreground="Black"
+                        FontSize="25"
+                        FontWeight="Normal"
+                        Content="Заказать звонок"
+                        Style="{StaticResource ButtonStyle1}"
+                        Click="RequesCall_Click"/>
             </Grid>
 
             <Grid x:Name="RequestCallStepOne"
-              Background="White"
-              Canvas.ZIndex="0">
+                  Background="White"
+                  Canvas.ZIndex="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.Resources>
-                    <Storyboard x:Key="flipFromMainToFirst">
+                    <Storyboard x:Key="flipFromFirstToSecond">
                         <DoubleAnimationUsingKeyFrames
                              Storyboard.TargetName="projection"
                              Storyboard.TargetProperty="RotationY">
@@ -261,7 +254,7 @@
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
 
-                    <Storyboard x:Key="flipFromFirstToMain">
+                    <Storyboard x:Key="flipFromSecondToFirst">
                         <DoubleAnimationUsingKeyFrames
                              Storyboard.TargetName="projection"
                              Storyboard.TargetProperty="RotationY">
@@ -294,13 +287,21 @@
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </Grid.Resources>
+                <ProgressRing x:Name="CategoryProgressRing"
+                              Grid.Row="1"
+                              Margin="50, 100"
+                              IsActive="True" 
+                              Width="60" 
+                              Height="60"
+                              Background="Transparent"
+                              Foreground="Black"/>
                 <TextBlock Text="Категории"
-                       Foreground="Black"
-                       FontSize="25"
-                       TextAlignment="Center"
-                       Padding="15"/>
+                           Foreground="Black"
+                           FontSize="25"
+                           TextAlignment="Center"
+                           Padding="15"/>
                 <ScrollViewer Grid.Row="1">
-                    <StackPanel>
+                    <StackPanel x:Name="CategoriesStack">
                         <StackPanel.Resources>
                             <Style TargetType="Button" x:Key="ListItem">
                                 <Setter Property="Foreground" Value="Black"/>
@@ -312,21 +313,13 @@
                                 <Setter Property="FontWeight" Value="Normal"/>
                             </Style>
                         </StackPanel.Resources>
-                        <Button x:Name="category1"
-                            Style ="{StaticResource ListItem}">
-                            <TextBlock Text="Категория 1"/>
-                        </Button>
-                        <Button x:Name="category2"
-                            Style="{StaticResource ListItem}">
-                            <TextBlock Text="Категория 2"/>
-                        </Button>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>
 
             <Grid x:Name="RequestCallStepTwo"
-              Background="White"
-              Canvas.ZIndex="0">
+                  Background="White"
+                  Canvas.ZIndex="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition/>
@@ -399,12 +392,20 @@
                     </Storyboard>
                 </Grid.Resources>
                 <TextBlock Text="Мастера"
-                       Foreground="Black"
-                       FontSize="25"
-                       TextAlignment="Center"
-                       Padding="15"/>
+                           Foreground="Black"
+                           FontSize="25"
+                           TextAlignment="Center"
+                           Padding="15"/>
+                <ProgressRing x:Name="MasterProgressRing" 
+                              Grid.Row="1"
+                              IsActive="True" 
+                              Width="60" 
+                              Height="60"
+                              Margin="50, 100"
+                              Background="Transparent"
+                              Foreground="Black"/>
                 <ScrollViewer Grid.Row="1">
-                    <StackPanel>
+                    <StackPanel x:Name="MasterStack">
                         <StackPanel.Resources>
                             <Style TargetType="Button" x:Key="ListItem">
                                 <Setter Property="Foreground" Value="Black"/>
@@ -416,26 +417,18 @@
                                 <Setter Property="FontWeight" Value="Normal"/>
                             </Style>
                         </StackPanel.Resources>
-                        <Button x:Name="master1"
-                            Style ="{StaticResource ListItem}">
-                            <TextBlock Text="Мастер 1"/>
-                        </Button>
-                        <Button x:Name="master2"
-                            Style="{StaticResource ListItem}">
-                            <TextBlock Text="Мастер 2"/>
-                        </Button>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>
 
             <Grid x:Name="RequestCallStepThree"
-              Background="White"
-              Canvas.ZIndex="0">
+                  Background="White"
+                  Canvas.ZIndex="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
                 <Grid.Resources>
                     <Storyboard x:Key="flipFromThirdToMain">
@@ -476,33 +469,34 @@
                        TextAlignment="Center"
                        Padding="15"/>
                 <DatePicker x:Name="TargetDatePicker"
-                        Grid.Row="1"
-                        Header="Дата"
-                        Foreground="Black"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center" Style="{StaticResource DatePickerLarge}" RequestedTheme="Light"/>
+                            Grid.Row="1"
+                            Header="Дата"
+                            Foreground="Black"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom" 
+                            Style="{StaticResource DatePickerLarge}" 
+                            RequestedTheme="Light"/>
                 <TextBox x:Name="DescriptionTextBox"
-                     BorderBrush="Black"
-                     BorderThickness="2"
-                     Grid.Row="2"
-                     Margin="90, 15"
-                     TextWrapping="Wrap" 
-                     PlaceholderText="Описание" 
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     VerticalAlignment="Stretch"/>
+                         BorderBrush="Black"
+                         BorderThickness="2"
+                         Grid.Row="2"
+                         Margin="90, 0"
+                         PlaceholderText="Описание" 
+                         VerticalAlignment="Top"
+                         ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
                 <Button x:Name="SubmitButton"
-                Grid.Row="3"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                BorderBrush="Black"
-                BorderThickness="2"
-                Foreground="Black"
-                FontSize="25"
-                FontWeight="Normal"
-                Content="Подтвердить"
-                Style="{StaticResource ButtonStyle1}"
-                Click="SubmitButton_Click"/>
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        Foreground="Black"
+                        FontSize="25"
+                        FontWeight="Normal"
+                        Content="Подтвердить"
+                        Style="{StaticResource ButtonStyle1}"
+                        Click="SubmitButton_Click"/>
             </Grid>
         </Grid>
         

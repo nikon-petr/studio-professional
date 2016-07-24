@@ -264,7 +264,7 @@ namespace Studio_Professional.Web
                     Scheme = Scheme,
                     Host = Domain,
                     Path = MasterPath + "Send.php",
-                    Query = "masterId=" + id.ToString() + "&phone=" + phone + "&desc=" + description + "&date=" + date.Date.ToString() 
+                    Query = "masterId=" + id.ToString() + "&phone=" + phone + "&desc=" + description + "&date=" + date.Date.ToString("d.MM.yyyy") 
                 }
                 .Uri
             );

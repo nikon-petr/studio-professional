@@ -58,7 +58,7 @@ namespace Studio_Professional
             }
 
             //Удаляет информацию о предыдущем сеансе
-            AppRepository.User.Delete();
+            //AppRepository.User.Delete();
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;

@@ -1,4 +1,5 @@
-﻿using Studio_Professional.Models;
+﻿using Studio_Professional.Json;
+using Studio_Professional.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -52,21 +53,38 @@ namespace Studio_Professional.Views
         {
         }
 
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        private async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
+
             if (!IsNameValidated && !IsNumberValidated)
             {
                 VibrationDevice vibration = VibrationDevice.GetDefault();
                 vibration.Vibrate(TimeSpan.FromMilliseconds(30));
                 return;
             }
-            App.AppRepository.User.Insert(new User
+
+            var response = await App.WebService.UserRegistrJsonResponse(NumberTextBox.Text, NameTextBox.Text);
+            var answer = await App.Deserializer.Execute<SimpleAnswer>(response.GetResponseStream());
+            if(answer.Answer == JsonAnswers.ALREADYHAVE)
             {
-                Name = NameTextBox.Text,
-                Number = NumberTextBox.Text,
-                LastLogin = DateTime.UtcNow
-            });
-            Frame.Navigate(typeof(MainPage));
+                Storyboard storyboard = NumberMessageFlipStoryboard;
+                storyboard.Begin();
+                VibrationDevice vibration = VibrationDevice.GetDefault();
+                vibration.Vibrate(TimeSpan.FromMilliseconds(30));
+                PhoneValidationMessage.Text = "Номер телефона уже зарегистрирован";
+                return;
+            }
+
+            if(answer.Answer == JsonAnswers.OK)
+            {
+                App.AppRepository.User.Insert(new User
+                {
+                    Name = NameTextBox.Text,
+                    Number = NumberTextBox.Text,
+                    LastLogin = DateTime.UtcNow
+                });
+                Frame.Navigate(typeof(MainPage));
+            }
         }
 
         private void NameTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
