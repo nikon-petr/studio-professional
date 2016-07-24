@@ -14,6 +14,8 @@
         public static string MAXSALE { get; } = "MAXSALE";
         public static string NaN { get; } = "NaN";
         public static string NOTFOUND { get; } = "NOTFOUND";
+        public static string NUMBERNOTFOUND { get; } = "NUMBERNOTFOUND";
+        public static string MASTERNOTFOUND { get; } = "MASTERNOTFOUND";
 
         private JsonAnswers() { }
     }

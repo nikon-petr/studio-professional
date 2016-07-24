@@ -90,6 +90,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Json\AboutAnswer.cs" />
+    <Compile Include="Json\CategoriesAnswer.cs" />
+    <Compile Include="Json\MastersAnswer.cs" />
     <Compile Include="Json\SimpleAnswer.cs" />
     <Compile Include="Json\Deserializer.cs" />
     <Compile Include="Json\JsonAnswers.cs" />

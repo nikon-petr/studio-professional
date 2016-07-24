@@ -14,6 +14,7 @@ namespace Studio_Professional.Web
         private static string UserPath { get; } = "studioProfessional/Api/Users/";
         private static string ContentPath { get; } = "studioProfessional/Api/Content/";
         private static string PromoPath { get; } = "studioProfessional/Api/Promo/";
+        private static string MasterPath { get; set; } = "studioProfessional/Api/Masters/";
 
         /// <summary>
         /// Асинхронный метод создает запрос с указанным Uri
@@ -209,6 +210,61 @@ namespace Studio_Professional.Web
                     Host = Domain,
                     Path = PromoPath + "GetPromo.php",
                     Query = "id=" + id.ToString()
+                }
+                .Uri
+            );
+        }
+
+        /// <summary>
+        /// Асинхронный метод инициирует запрос к скриту GetCatMasters.php
+        /// </summary>
+        public async Task<WebResponse> GetCategoriesJsonResponse()
+        {
+            return await MakeRequest(
+                new UriBuilder
+                {
+                    Scheme = Scheme,
+                    Host = Domain,
+                    Path = MasterPath + "GetCatMasters.php"
+                }
+                .Uri
+            );
+        }
+
+        /// <summary>
+        /// Асинхронный метод инициирует запрос к скриту GetMasters.php
+        /// </summary>
+        /// <param name="id">Id категории</param>
+        public async Task<WebResponse> GetMasterJsonResponse(int id)
+        {
+            return await MakeRequest(
+                new UriBuilder
+                {
+                    Scheme = Scheme,
+                    Host = Domain,
+                    Path = MasterPath + "GetMasters.php",
+                    Query = "catId=" + id.ToString()
+                }
+                .Uri
+            );
+        }
+
+        /// <summary>
+        /// Асинхронный метод инициирует запрос к скриту Send.php
+        /// </summary>
+        /// <param name="id">Id мастера</param>
+        /// <param name="phone">Телефон пользователя</param>
+        /// <param name="description">Описание</param>
+        /// <param name="date">Дата</param>
+        public async Task<WebResponse> SendJsonResponse(int id, string phone, string description, DateTime date)
+        {
+            return await MakeRequest(
+                new UriBuilder
+                {
+                    Scheme = Scheme,
+                    Host = Domain,
+                    Path = MasterPath + "Send.php",
+                    Query = "masterId=" + id.ToString() + "&phone=" + phone + "&desc=" + description + "&date=" + date.Date.ToString() 
                 }
                 .Uri
             );
