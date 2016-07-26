@@ -1,7 +1,9 @@
-﻿using Studio_Professional.Repository;
+﻿using Studio_Professional.Json;
+using Studio_Professional.Repository;
 using Studio_Professional.Views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -17,6 +19,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using System.Net;
 
 // Документацию по шаблону "Пустое приложение" см. по адресу http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -49,7 +52,7 @@ namespace Studio_Professional
         /// результатов поиска и т. д.
         /// </summary>
         /// <param name="e">Сведения о запросе и обработке запуска.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -60,6 +63,20 @@ namespace Studio_Professional
             //Удаляет информацию о предыдущем сеансе
             //AppRepository.User.Delete();
 #endif
+
+            WebResponse response = await WebService.AboutContentJsonResponse();
+            var json = await Deserializer.Execute<AboutAnswer>(response.GetResponseStream());
+            var model = await json.GetModel();
+            if (AppRepository.AboutPage.Content == null)
+            {
+                AppRepository.AboutPage.Insert(model);
+            }
+            if (AppRepository.AboutPage.Content.Utd != json.Date)
+            {
+                AppRepository.AboutPage.UpdatePageContent(model);
+            }
+
+
 
             Frame rootFrame = Window.Current.Content as Frame;
 

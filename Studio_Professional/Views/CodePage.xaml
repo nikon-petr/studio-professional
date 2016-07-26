@@ -45,15 +45,16 @@
             <Border BorderBrush="Black"
                     BorderThickness="0, 0, 0, 1"
                     Width="240">
-                <PasswordBox PlaceholderText="••••"
+                <PasswordBox x:Name="PasswordTextBox"
+                             PlaceholderText="●●●● "
+                             Password=""
                              Margin="0, 55, 0, 0"
-                             Padding="40, 0, 0, 0"
-                             Width="240"
+                             Padding="27, 0, 10, 0"
                              FontSize="30"
-                             CharacterSpacing="900"
+                             CharacterSpacing="600"
                              MaxLength="4" 
-                             
-                             Style="{StaticResource PasswordBoxMyStyle}"/>
+                             HorizontalAlignment="Center"
+                             Style="{StaticResource PasswordBoxMyStyle}" LostFocus="PasswordBox_LostFocus"/>
             </Border>
             <TextBlock Text="Его можно получить в салоне у администратора"
                        Width="200"

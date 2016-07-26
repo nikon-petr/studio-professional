@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Studio_Professional.Json;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -16,13 +18,13 @@ namespace Studio_Professional.Models
     {
         public long Id { get; set; }
         
-        public BitmapImage Image1 { get; set; }
+        public byte[] Image1 { get; set; }
 
-        public BitmapImage Image2 { get; set; }
+        public byte[] Image2 { get; set; }
 
-        public BitmapImage Image3 { get; set; }
+        public byte[] Image3 { get; set; }
 
-        public BitmapImage Image4 { get; set; }
+        public byte[] Image4 { get; set; }
 
         public string TextHeader { get; set; }
 
@@ -32,9 +34,9 @@ namespace Studio_Professional.Models
 
         public string TextContent2 { get; set; }
 
-        public BitmapImage Image5 { get; set; }
+        public byte[] Image5 { get; set; }
 
-        public BitmapImage Image6 { get; set; }
+        public byte[] Image6 { get; set; }
 
         public string YouTubeId2 { get; set; }
 

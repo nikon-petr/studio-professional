@@ -1,4 +1,4 @@
-﻿<Page
+﻿<Page xmlns:my="using:Windows.UI.Xaml.Controls.Maps" 
     x:Class="Studio_Professional.Views.AboutPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -38,60 +38,49 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Image
+                        x:Name="Image1"
 						Width="auto"
-						Margin="0, 0, 10, 10"
-						Source="ms-appx:///Resorses/Img/About/pic1.png"/>
+						Margin="0, 0, 10, 10"/>
                     <Image
+                        x:Name="Image2"
 						Grid.Column="1"
 						Width="auto"
-						Margin="10, 0, 0, 10"
-						Source="ms-appx:///Resorses/Img/About/pic2.png"/>
+						Margin="10, 0, 0, 10"/>
                     <Image
+                        x:Name="Image3"
 						Grid.Row="1"
 						Width="auto"
-						Margin="0, 10, 10, 0"
-						Source="ms-appx:///Resorses/Img/About/pic3.png"/>
+						Margin="0, 10, 10, 0"/>
                     <Image
+                        x:Name="Image4"
 						Grid.Row="1"
 						Grid.Column="1"
 						Width="auto"
-						Margin="10, 10, 0, 0"
-						Source="ms-appx:///Resorses/Img/About/pic4.png"/>
+						Margin="10, 10, 0, 0"/>
                 </Grid>
                 <TextBlock
-					Text="О салоне"
+                    x:Name="TextHeader"
+					Text=""
 					Foreground="Black"
 					FontSize="35"
 					TextAlignment="Center"
 					Margin="0, 20" 
 					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
-					x:Name="FirstTextBlock"
-					Text="Искреннее отношение к работе и клиенту, честность, желание преобразить наших клиентов и сделать их успешнее создали крепкую и блестящую репутациюнашего салона."
-					Foreground="Black"
-					FontSize="17"
-					TextWrapping="WrapWholeWords"
-					Margin="15, 5" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
-                <WebView
-					x:Name="FirstVideo"
-					Margin="15, 20"
-					Height="240"/>
-                <TextBlock
-					x:Name="SecondTextBlock"
-					Text="Искреннее отношение к работе и клиенту, честность, желание преобразить наших клиентов и сделать их успешнее создали крепкую и блестящую репутациюнашего салона."
+					x:Name="TextContent"
+					Text=""
 					Foreground="Black"
 					FontSize="17"
 					TextWrapping="WrapWholeWords"
 					Margin="15, 5" 
 					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
-					x:Name="ThirdTextBlock"
-					Text="Искреннее отношение к работе и клиенту, честность, желание преобразить наших клиентов и сделать их успешнее создали крепкую и блестящую репутациюнашего салона."
+					x:Name="TextContent2"
+					Text=""
 					Foreground="Black"
 					FontSize="17"
 					TextWrapping="WrapWholeWords"
-					Margin="15, 15" 
+					Margin="15, 5" 
 					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <Grid Margin="15, 5">
                     <Grid.ColumnDefinitions>
@@ -100,58 +89,67 @@
                     </Grid.ColumnDefinitions>
 
                     <Image 
+                        x:Name="Image5"
 						Width="auto"
-						Margin="0, 0, 10, 0"
-						Source="ms-appx:///Resorses/Img/About/pic5.png"/>
+						Margin="0, 0, 10, 0"/>
                     <Image
+                        x:Name="Image6"
 						Grid.Column="1"
 						Width="auto" 
-						Margin="10, 0, 0, 0"
-						Source="ms-appx:///Resorses/Img/About/pic6.png"/>
+						Margin="10, 0, 0, 0"/>
                 </Grid>
-                <WebView
-					Margin="15"
-                    Height="240"
-					x:Name="SecondVideo"/>
                 <TextBlock
-					Text="Адрес"
+                    x:Name="AdressHeader"
+					Text=""
 					Foreground="Black"
 					FontSize="35"
 					TextAlignment="Center"
 					Margin="0, 20" 
 					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
-					x:Name="AddressTextBlock"
-					Text="Искреннее отношение к работе и клиенту, честность, желание преобразить наших клиентов и сделать их успешнее создали крепкую и блестящую репутациюнашего салона."
+					x:Name="AddressText"
+					Text=""
 					Foreground="Black"
 					FontSize="17"
 					TextWrapping="WrapWholeWords"
 					Margin="15, 5" 
 					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
-					Text="Контакты академии"
+                    x:Name="ContactHeader"
+					Text=""
 					Foreground="Black"
 					FontSize="35"
 					TextAlignment="Center"
 					Margin="0, 20" 
 					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
-					x:Name="ContactsTextBlock"
-					Text="Искреннее отношение к работе и клиенту, честность, желание преобразить наших клиентов и сделать их успешнее создали крепкую и блестящую репутациюнашего салона."
+					x:Name="ContactsText"
+					Text=""
 					Foreground="Black"
 					FontSize="17"
 					TextWrapping="WrapWholeWords"
 					Margin="15, 5" 
 					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
-					Text="Мы в социальных сетях"
+                    x:Name="PhoneHeader"
+					Text=""
 					Foreground="Black"
 					FontSize="35"
 					TextAlignment="Center"
-					Margin="0, 20" 
+					Margin="15, 20" 
 					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+                <TextBlock
+                    x:Name="PhoneText"
+					Text=""
+					Foreground="Black"
+					FontSize="17"
+					TextWrapping="WrapWholeWords"
+					Margin="15, 5" 
+					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+
                 <Grid Margin="55, 0, 55, 35">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -167,7 +165,7 @@
                         Style="{StaticResource ButtonTransperentBackground}">
                         <Button.Background>
                             <ImageBrush
-                                ImageSource="ms-appx:///Resources/Img/About/vk_icon.png"/>
+                                ImageSource="ms-appx:///Resorses/Img/About/vk_icon.png"/>
                         </Button.Background>
                     </Button>
                     <Button
@@ -181,8 +179,8 @@
                         Style="{StaticResource ButtonTransperentBackground}">
                         <Button.Background>
                             <ImageBrush
-                                ImageSource="ms-appx:///Resources/Img/About/fb_icon.png"/>
-                        </Button.Background>                    
+                                ImageSource="ms-appx:///Resorses/Img/About/fb_icon.png"/>
+                        </Button.Background>
                     </Button>
                     <Button
 						x:Name="GoToTwButton"
@@ -195,13 +193,27 @@
                         Style="{StaticResource ButtonTransperentBackground}">
                         <Button.Background>
                             <ImageBrush
-                                ImageSource="ms-appx:///Resources/Img/About/tw_icon.png"/>
-                        </Button.Background>                    
+                                ImageSource="ms-appx:///Resorses/Img/About/tw_icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button
+						x:Name="GoToInstButton"
+                        Grid.Column="3"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+						BorderThickness="0"
+                        Width="50"
+                        Height="50"
+                        Style="{StaticResource ButtonTransperentBackground}">
+                        <Button.Background>
+                            <ImageBrush
+                                ImageSource="ms-appx:///Resorses/Img/About/inst_icon.png"/>
+                        </Button.Background>
                     </Button>
                 </Grid>
-                <!--<Maps:MapControl
-                    MapServiceToken="MyToken"
-                    Height="300"/>-->
+                <my:MapControl x:Name="Map"
+                               MapServiceToken="MyToken"
+                               Height="300"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

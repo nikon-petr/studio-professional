@@ -89,33 +89,31 @@ namespace Studio_Professional
                             PageState = DialogStep.SecondStep;
                             CallRequestData.CategoryId = category.Id;
 
-                            if (masterButtons == null)
+                            MasterStack.Children.Clear();
+                            masterButtons = new List<Button>(10);
+                            var res = await App.WebService.GetMasterJsonResponse(CallRequestData.CategoryId);
+                            var masters = await App.Deserializer.Execute<MastersAnswer>(res.GetResponseStream());
+                            MasterProgressRing.IsActive = false;
+
+                            foreach (var master in masters.Masters)
                             {
-                                masterButtons = new List<Button>(10);
-                                var res = await App.WebService.GetMasterJsonResponse(CallRequestData.CategoryId);
-                                var masters = await App.Deserializer.Execute<MastersAnswer>(res.GetResponseStream());
-                                MasterProgressRing.IsActive = false;
-
-                                foreach (var master in masters.Masters)
+                                var btn = new Button
                                 {
-                                    var btn = new Button
-                                    {
-                                        Style = MasterStack.Resources["ListItem"] as Style,
-                                        Content = master.Name
-                                    };
+                                    Style = MasterStack.Resources["ListItem"] as Style,
+                                    Content = master.Name
+                                };
 
-                                    btn.Click += (senderc, cc) =>
+                                btn.Click += (senderc, cc) =>
+                                {
+                                    if (PageState == DialogStep.SecondStep)
                                     {
-                                        if (PageState == DialogStep.SecondStep)
-                                        {
-                                            flipFromSecondToThird.Begin();
-                                            PageState = DialogStep.ThirdStep;
-                                            CallRequestData.MasterId = master.Id;
-                                        }
-                                    };
-                                    masterButtons.Add(btn);
-                                    MasterStack.Children.Add(btn);
-                                }
+                                        flipFromSecondToThird.Begin();
+                                        PageState = DialogStep.ThirdStep;
+                                        CallRequestData.MasterId = master.Id;
+                                    }
+                                };
+                                masterButtons.Add(btn);
+                                MasterStack.Children.Add(btn);
                             }
                         }
                     };

@@ -8,7 +8,7 @@ namespace Studio_Professional.Json
     [DataContract]
     public class SimpleAnswer
     {
-        [DataMember(Name = "answer")]
+        [DataMember(Name = "answer", IsRequired = false)]
         public string Answer;
     }
 }

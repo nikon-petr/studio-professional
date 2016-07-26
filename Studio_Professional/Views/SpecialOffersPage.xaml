@@ -24,8 +24,6 @@
             <Setter Property="Background">
                 <Setter.Value>
                     <ImageBrush ImageSource="ms-appx:///Resorses/Img/Main/special_offers.png"
-                                AlignmentX="Center"
-                                AlignmentY="Center"
                                  Stretch="UniformToFill"/>
                 </Setter.Value>
             </Setter>
@@ -64,9 +62,7 @@
                 Style="{StaticResource ButtonTransperentBackground}">
             <Button.Background>
                 <ImageBrush ImageSource="ms-appx:///Resorses/Img/Common/Arrow.png"
-                            Stretch="None"
-                            AlignmentX="Center"
-                            AlignmentY="Center"/>
+                            Stretch="None"/>
             </Button.Background>
         </Button>
         <TextBlock Text="Наши акции"
@@ -76,15 +72,17 @@
                     VerticalAlignment="Top"
                     Margin="0, 23, 0, 0"/>
         <ScrollViewer Grid.Row="1">
-            <StackPanel Orientation="Vertical"
+            <StackPanel x:Name="ContentStackPanel"
+                        Orientation="Vertical"
                         Margin="15, -0, 15, 0">
-                <Grid>
+                <Grid x:Name="ContentGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-
-                    <Button x:Name="b1"
+                    <Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
+                    <!--<Button x:Name="b1"
                             Style="{StaticResource LeftButton}"
                             Click="b1_Click">
                         <TextBlock Text="Стрижка горячими ножницами в подарок!"
@@ -94,58 +92,7 @@
                             Style="{StaticResource RightButton}">
                         <TextBlock Text="Стрижка горячими ножницами в подарок!"
                                    Style="{StaticResource ButtonContentTextBLock}"/>
-                    </Button>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <Button x:Name="b3"
-                            Style="{StaticResource LeftButton}">
-                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
-                                   Style="{StaticResource ButtonContentTextBLock}"/>
-                    </Button>
-                    <Button x:Name="b4"
-                            Style="{StaticResource RightButton}">
-                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
-                                   Style="{StaticResource ButtonContentTextBLock}"/>
-                    </Button>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <Button x:Name="b5"
-                            Style="{StaticResource LeftButton}">
-                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
-                                   Style="{StaticResource ButtonContentTextBLock}"/>
-                    </Button>
-                    <Button x:Name="b6"
-                            Style="{StaticResource RightButton}">
-                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
-                                   Style="{StaticResource ButtonContentTextBLock}"/>
-                    </Button>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <Button x:Name="b7"
-                            Style="{StaticResource LeftButton}">
-                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
-                                   Style="{StaticResource ButtonContentTextBLock}"/>
-                    </Button>
-                    <Button x:Name="b8"
-                            Style="{StaticResource RightButton}">
-                        <TextBlock Text="Стрижка горячими ножницами в подарок!"
-                                   Style="{StaticResource ButtonContentTextBLock}"/>
-                    </Button>
+                    </Button>-->
                 </Grid>
             </StackPanel>
         </ScrollViewer>

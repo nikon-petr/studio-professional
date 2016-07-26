@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Studio_Professional.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.Devices.Notification;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -61,6 +63,39 @@ namespace Studio_Professional.Views
             {
                 e.Handled = true;
                 Frame.GoBack();
+            }
+        }
+
+        private async void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            int code;
+            if(!int.TryParse(PasswordTextBox.Password, out code)) {
+                MessageDialog msg = new MessageDialog("Пароль должен состоять из цифр", "Ошибка");
+                await msg.ShowAsync();
+                return;
+            }
+            var response = await App.WebService.AddSaleJsonResponse(App.AppRepository.User.Data.Number, PasswordTextBox.Password);
+            var json = await App.Deserializer.Execute<SimpleAnswer>(response.GetResponseStream());
+
+            if(json.Answer == JsonAnswers.OK)
+            {
+                VibrationDevice vibration = VibrationDevice.GetDefault();
+                vibration.Vibrate(TimeSpan.FromMilliseconds(30));
+                Frame.GoBack();
+
+                var response1 = await App.WebService.UserSaleJsonResponse(App.AppRepository.User.Data.Number);
+                var json1 = await App.Deserializer.Execute<SimpleAnswer>(response1.GetResponseStream());
+
+                if (json1.Answer == JsonAnswers.OK)
+                {
+                    App.AppRepository.User.Data.Discount = json1.Answer;
+                    return;
+                }
+            }
+            else
+            {
+                MessageDialog msg = new MessageDialog(json.Answer, "Ошибка");
+                await msg.ShowAsync();
             }
         }
     }

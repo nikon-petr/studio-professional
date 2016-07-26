@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Studio_Professional.Web
 {
@@ -264,10 +267,28 @@ namespace Studio_Professional.Web
                     Scheme = Scheme,
                     Host = Domain,
                     Path = MasterPath + "Send.php",
-                    Query = "masterId=" + id.ToString() + "&phone=" + phone + "&desc=" + description + "&date=" + date.Date.ToString("d.MM.yyyy") 
+                    Query = "masterId=" + id.ToString() + "&phone=" + phone + "&desc=" + description + "&date=" + date.Date.ToString("d.MM.yyyy")
                 }
                 .Uri
             );
+        }
+
+        /// <summary>
+        /// Асинхронно загружает изображение по ссылке
+        /// </summary>
+        /// <param name="uri">Ссылка на изображение</param>
+        /// <returns>Массив байт</returns>
+        public async Task<byte[]> DownloadImage(string uri)
+        {
+            return await Task.Run(async () =>
+            {
+                var response = await MakeRequest(new Uri(uri));
+                using(MemoryStream ms = new MemoryStream())
+                {
+                    response.GetResponseStream().CopyTo(ms);
+                    return ms.ToArray();
+                }
+            });
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Studio_Professional.Json;
+using Studio_Professional.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +9,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.Devices.Notification;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,10 +27,13 @@ namespace Studio_Professional.Views
     /// </summary>
     public sealed partial class DiscountPage : Page
     {
+        public User user;
+
         public DiscountPage()
         {
             this.InitializeComponent();
             Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+            NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
         /// <summary>
@@ -73,6 +79,25 @@ namespace Studio_Professional.Views
         private void GetDiscountButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(CodePage));
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadingRing.IsActive = true;
+            LoadingRingBackground.Visibility = Visibility.Visible;
+            var response = await App.WebService.UserSaleJsonResponse(App.AppRepository.User.Data.Number);
+            var json = await App.Deserializer.Execute<SimpleAnswer>(response.GetResponseStream());
+
+            if (json.Answer == JsonAnswers.WRONGNUMBER || json.Answer == JsonAnswers.NODATA)
+            {
+                await new MessageDialog(json.Answer, "Ошибка").ShowAsync();
+                return;
+            }
+            DiscountTextBlock.Text = DiscountTextBlock.Text != App.AppRepository.User.Data.Discount ? App.AppRepository.User.Data.Discount : DiscountTextBlock.Text;
+            LoadingRing.IsActive = false;
+            LoadingRingBackground.Visibility = Visibility.Collapsed;
+
+            await new MessageDialog(json.Answer, "").ShowAsync();
         }
     }
 }

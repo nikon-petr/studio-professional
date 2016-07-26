@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Studio_Professional.Models;
+using Studio_Professional.Web;
+using System;
+using System.Globalization;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 
 namespace Studio_Professional.Json
 {
@@ -10,16 +14,16 @@ namespace Studio_Professional.Json
     public class AboutAnswer : SimpleAnswer
     {
         [DataMember(Name = "Image1-1")]
-        public byte[] Image1 { get; set; }
+        public string Image1Uri { get; set; }
 
         [DataMember(Name = "Image1-2")]
-        public byte[] Image2 { get; set; }
+        public string Image2Uri { get; set; }
 
         [DataMember(Name = "Image1-3")]
-        public byte[] Image3 { get; set; }
+        public string Image3Uri { get; set; }
 
         [DataMember(Name = "Image1-4")]
-        public byte[] Image4 { get; set; }
+        public string Image4Uri { get; set; }
 
         [DataMember(Name = "textBlock1Header")]
         public string TextHeader { get; set; }
@@ -34,10 +38,10 @@ namespace Studio_Professional.Json
         public string TextContent2 { get; set; }
 
         [DataMember(Name = "Image2-1")]
-        public byte[] Image5 { get; set; }
+        public string Image5Uri { get; set; }
 
         [DataMember(Name = "Image2-2")]
-        public byte[] Image6 { get; set; }
+        public string Image6Uri { get; set; }
 
         [DataMember(Name = "YoutubeId2")]
         public string YouTubeId2 { get; set; }
@@ -75,10 +79,56 @@ namespace Studio_Professional.Json
         [DataMember(Name = "Map-x")]
         public double MapX { get; set; }
 
-        [DataMember(Name ="Map-y")]
+        [DataMember(Name = "Map-y")]
         public double MapY { get; set; }
 
-        [DataMember]
-        public DateTime Utd { get; set; }
+        [DataMember(Name = "Utd")]
+        public string DateString { get; set; }
+
+        private DateTime utd;
+
+        public DateTime Date
+        {
+            get { return utd; }
+            set
+            {
+                utd = DateTime.ParseExact(DateString, "dd.MM.yyyy hh:mm", CultureInfo.CurrentCulture);
+            }
+        }
+
+        public async Task<AboutPage> GetModel()
+        {
+            return await Task.Run(async () =>
+            {
+                return new AboutPage
+                {
+                    Id = 42,
+                    Image1 = await App.WebService.DownloadImage(Image1Uri),
+                    Image2 = await App.WebService.DownloadImage(Image2Uri),
+                    Image3 = await App.WebService.DownloadImage(Image3Uri),
+                    Image4 = await App.WebService.DownloadImage(Image4Uri),
+                    Image5 = await App.WebService.DownloadImage(Image5Uri),
+                    Image6 = await App.WebService.DownloadImage(Image6Uri),
+                    TextHeader = TextHeader,
+                    TextContent = TextContent,
+                    TextContent2 = TextContent2,
+                    AdressHeader = AdressHeader,
+                    AdressText = AdressText,
+                    ContactHeader = ContactHeader,
+                    ContactText = ContactText,
+                    PhoneHeader = PhoneHeader,
+                    PhoneText = PhoneText,
+                    YouTubeId1 = YouTubeId1,
+                    YouTubeId2 = YouTubeId2,
+                    SocialLinkFb = SocialLinkFb,
+                    SocialLinkInst = SocialLinkInst,
+                    SocialLinkTw = SocialLinkTw,
+                    SocialLinkVk = SocialLinkVk,
+                    MapX = MapX,
+                    MapY = MapY,
+                    Utd = Date
+                };
+            });
+        }
     }
 }

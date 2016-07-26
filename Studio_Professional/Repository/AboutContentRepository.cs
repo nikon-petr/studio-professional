@@ -3,6 +3,7 @@ using Studio_Professional.Json;
 using Studio_Professional.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace Studio_Professional.Repository
 {
-    public class AboutContentRepository
+    public class AboutContentRepository : IDisposable
     {
         private SQLiteConnection connection;
         private AboutPage aboutPageContent;
@@ -32,10 +33,7 @@ namespace Studio_Professional.Repository
             {
                 if (aboutPageContent == null)
                 {
-                    Task.Run(async () =>
-                    {
-                        aboutPageContent = await GetAboutPageContent();
-                    });
+                    aboutPageContent = GetAboutPageContent();
                 }
                 return aboutPageContent;
             }
@@ -84,9 +82,11 @@ namespace Studio_Professional.Repository
         /// Получает данные страницы из базы данных
         /// </summary>
         /// <returns></returns>
-        private async Task<AboutPage> GetAboutPageContent()
+        private AboutPage GetAboutPageContent()
         {
-            using (var statement = connection.Prepare("SELECT * FROM AboutPageContent"))
+            using (var statement = connection.Prepare(@"SELECT Id, Image1_1, Image1_2, Image1_3, Image1_4, TextHeader, TextContent,
+                YouTubeId1, TextContent2,Image2_1, Image2_2, YouTubeId2, AdressHeader, AdressText, ContactHeader, ContactText, PhoneHeader,
+                PhoneText, SocialLinkVk, SocialLinkTw, SocialLinkInst, SocialLinkFb, MapX, MapY, Utd FROM AboutPageContent WHERE Id=42"))
             {
                 if (statement.Step() != SQLiteResult.ROW)
                 {
@@ -94,31 +94,31 @@ namespace Studio_Professional.Repository
                 }
                 aboutPageContent = new AboutPage
                 {
-                    Id = statement.GetInteger("Id"),
-                    Image1 = await AboutPage.ConvertBytesToBitmapImage(statement.GetBlob("Image1-1")),
-                    Image2 = await AboutPage.ConvertBytesToBitmapImage(statement.GetBlob("Image1-2")),
-                    Image3 = await AboutPage.ConvertBytesToBitmapImage(statement.GetBlob("Image1-3")),
-                    Image4 = await AboutPage.ConvertBytesToBitmapImage(statement.GetBlob("Image1-4")),
-                    TextHeader = statement.GetText("TextHeader"),
-                    TextContent = statement.GetText("TextContent"),
-                    YouTubeId1 = statement.GetText("YouTubeId1"),
-                    TextContent2 = statement.GetText("TextContent2"),
-                    Image5 = await AboutPage.ConvertBytesToBitmapImage(statement.GetBlob("Image2-1")),
-                    Image6 = await AboutPage.ConvertBytesToBitmapImage(statement.GetBlob("Image2-2")),
-                    YouTubeId2 = statement.GetText("YouTubeId2"),
-                    AdressHeader = statement.GetText("AdressText"),
-                    AdressText = statement.GetText("AdressText"),
-                    ContactHeader = statement.GetText("ContactHeader"),
-                    ContactText = statement.GetText("ContactText"),
-                    PhoneHeader = statement.GetText("PhoneHeader"),
-                    PhoneText = statement.GetText("PhoneText"),
-                    SocialLinkVk = statement.GetText("SocialLinkVk"),
-                    SocialLinkTw = statement.GetText("SocialLinkTw"),
-                    SocialLinkInst = statement.GetText("SocialLinkInst"),
-                    SocialLinkFb = statement.GetText("SocialLinkFb"),
-                    MapX = statement.GetFloat("MapX"),
-                    MapY = statement.GetFloat("MapY"),
-                    Utd = new DateTime(statement.GetInteger("Utd"))
+                    Id = statement.GetInteger(0),
+                    Image1 = statement.GetBlob(1),
+                    Image2 = statement.GetBlob(2),
+                    Image3 = statement.GetBlob(3),
+                    Image4 = statement.GetBlob(4),
+                    TextHeader = (string)statement[5],
+                    TextContent = (string)statement[6],
+                    YouTubeId1 = (string)statement[7],
+                    TextContent2 = (string)statement[8],
+                    Image5 = statement.GetBlob(9),
+                    Image6 = statement.GetBlob(10),
+                    YouTubeId2 = (string)statement[11],
+                    AdressHeader = (string)statement[12],
+                    AdressText = (string)statement[13],
+                    ContactHeader = (string)statement[14],
+                    ContactText = (string)statement[15],
+                    PhoneHeader = (string)statement[16],
+                    PhoneText = (string)statement[17],
+                    SocialLinkVk = (string)statement[18],
+                    SocialLinkTw = (string)statement[19],
+                    SocialLinkInst = (string)statement[20],
+                    SocialLinkFb = (string)statement[21],
+                    MapX = statement.GetFloat(22),
+                    MapY = statement.GetFloat(23),
+                    Utd = new DateTime(statement.GetInteger(24))
                 };
                 return Content;
             }
@@ -128,12 +128,9 @@ namespace Studio_Professional.Repository
         /// Сохраняет данные страницы в базу данных
         /// </summary>
         /// <param name="aboutPage">Объект для сохранения</param>
-        public async void Insert(AboutAnswer aboutPage)
+        public void Insert(AboutPage aboutPage)
         {
-            await Task.Run(() =>
-            {
-                string query = @"INSERT INTO AboutPageContent VALUES
-                (
+            string query = @"INSERT INTO AboutPageContent(   
                     Id,
                     Image1_1,
                     Image1_2,
@@ -159,42 +156,43 @@ namespace Studio_Professional.Repository
                     MapX,
                     MapY,
                     Utd
-                )";
-                using (var statement = connection.Prepare(query))
-                {
-                    statement.Bind("Id", 42);
-                    statement.Bind("Image1_1", aboutPage.Image1);
-                    statement.Bind("Image1_2", aboutPage.Image2);
-                    statement.Bind("Image1_3", aboutPage.Image3);
-                    statement.Bind("Image1_4", aboutPage.Image4);
-                    statement.Bind("TextHeader", aboutPage.TextHeader);
-                    statement.Bind("TextContent", aboutPage.TextContent);
-                    statement.Bind("YouTubeId1", aboutPage.YouTubeId1);
-                    statement.Bind("Image2_1", aboutPage.Image5);
-                    statement.Bind("Image2_2", aboutPage.Image6);
-                    statement.Bind("YouTubeId2", aboutPage.YouTubeId2);
-                    statement.Bind("AdressHeader", aboutPage.AdressHeader);
-                    statement.Bind("AdressText", aboutPage.AdressText);
-                    statement.Bind("ContactHeader", aboutPage.ContactHeader);
-                    statement.Bind("ContactText", aboutPage.ContactText);
-                    statement.Bind("PhoneHeader", aboutPage.PhoneHeader);
-                    statement.Bind("PhoneText", aboutPage.PhoneText);
-                    statement.Bind("SocialLinkVk", aboutPage.SocialLinkVk);
-                    statement.Bind("SocialLinkTw", aboutPage.SocialLinkTw);
-                    statement.Bind("SocialLinkInst", aboutPage.SocialLinkInst);
-                    statement.Bind("SocialLinkFb", aboutPage.SocialLinkFb);
-                    statement.Bind("MapX", aboutPage.MapX);
-                    statement.Bind("MapY", aboutPage.MapY);
-                    statement.Bind("Utd", aboutPage.Utd);
-                    statement.Step();
-                }
-            });
+                ) 
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            using (var statement = connection.Prepare(query))
+            {
+                statement.Bind(1, 42);
+                statement.Bind(2, aboutPage.Image1);
+                statement.Bind(3, aboutPage.Image2);
+                statement.Bind(4, aboutPage.Image3);
+                statement.Bind(5, aboutPage.Image4);
+                statement.Bind(6, aboutPage.TextHeader);
+                statement.Bind(7, aboutPage.TextContent);
+                statement.Bind(8, aboutPage.YouTubeId1);
+                statement.Bind(9, aboutPage.TextContent2);
+                statement.Bind(10, aboutPage.Image5);
+                statement.Bind(11, aboutPage.Image6);
+                statement.Bind(12, aboutPage.YouTubeId2);
+                statement.Bind(13, aboutPage.AdressHeader);
+                statement.Bind(14, aboutPage.AdressText);
+                statement.Bind(15, aboutPage.ContactHeader);
+                statement.Bind(16, aboutPage.ContactText);
+                statement.Bind(17, aboutPage.PhoneHeader);
+                statement.Bind(18, aboutPage.PhoneText);
+                statement.Bind(19, aboutPage.SocialLinkVk);
+                statement.Bind(20, aboutPage.SocialLinkTw);
+                statement.Bind(21, aboutPage.SocialLinkInst);
+                statement.Bind(22, aboutPage.SocialLinkFb);
+                statement.Bind(23, aboutPage.MapX);
+                statement.Bind(24, aboutPage.MapY);
+                statement.Bind(25, aboutPage.Utd.Ticks);
+                statement.Step();
+            }
         }
 
         /// <summary>
         /// Обновляет данные страницы в базу данных
         /// </summary>
-        public void UpdatePageContent(AboutAnswer aboutPage)
+        public void UpdatePageContent(AboutPage aboutPage)
         {
             string query = @"
                 UPDATE AboutPageContent Set 
@@ -225,30 +223,30 @@ namespace Studio_Professional.Repository
                 WHERE Id=42 ";
             using (var statement = connection.Prepare(query))
             {
-                statement.Bind("Image1_1", aboutPage.Image1);
-                statement.Bind("Image1_2", aboutPage.Image2);
-                statement.Bind("Image1_3", aboutPage.Image3);
-                statement.Bind("Image1_4", aboutPage.Image4);
-                statement.Bind("TextHeader", aboutPage.TextHeader);
-                statement.Bind("TextContent", aboutPage.TextContent);
-                statement.Bind("YouTubeId1", aboutPage.YouTubeId1);
-                statement.Bind("TextContent2", aboutPage.TextContent2);
-                statement.Bind("Image2_1", aboutPage.Image5);
-                statement.Bind("Image2_2", aboutPage.Image6);
-                statement.Bind("YouTubeId2", aboutPage.YouTubeId2);
-                statement.Bind("AdressHeader", aboutPage.AdressHeader);
-                statement.Bind("AdressText", aboutPage.AdressText);
-                statement.Bind("ContactHeader", aboutPage.ContactHeader);
-                statement.Bind("ContactText", aboutPage.ContactText);
-                statement.Bind("PhoneHeader", aboutPage.PhoneHeader);
-                statement.Bind("PhoneText", aboutPage.PhoneText);
-                statement.Bind("SocialLinkVk", aboutPage.SocialLinkVk);
-                statement.Bind("SocialLinkTw", aboutPage.SocialLinkTw);
-                statement.Bind("SocialLinkInst", aboutPage.SocialLinkInst);
-                statement.Bind("SocialLinkFb", aboutPage.SocialLinkFb);
-                statement.Bind("MapX", aboutPage.MapX);
-                statement.Bind("MapX", aboutPage.MapY);
-                statement.Bind("Utd", aboutPage.Utd);
+                statement.Bind(1, aboutPage.Image1);
+                statement.Bind(2, aboutPage.Image2);
+                statement.Bind(3, aboutPage.Image3);
+                statement.Bind(4, aboutPage.Image4);
+                statement.Bind(5, aboutPage.TextHeader);
+                statement.Bind(6, aboutPage.TextContent);
+                statement.Bind(7, aboutPage.YouTubeId1);
+                statement.Bind(8, aboutPage.TextContent2);
+                statement.Bind(9, aboutPage.Image5);
+                statement.Bind(10, aboutPage.Image6);
+                statement.Bind(11, aboutPage.YouTubeId2);
+                statement.Bind(12, aboutPage.AdressHeader);
+                statement.Bind(13, aboutPage.AdressText);
+                statement.Bind(14, aboutPage.ContactHeader);
+                statement.Bind(15, aboutPage.ContactText);
+                statement.Bind(16, aboutPage.PhoneHeader);
+                statement.Bind(17, aboutPage.PhoneText);
+                statement.Bind(18, aboutPage.SocialLinkVk);
+                statement.Bind(19, aboutPage.SocialLinkTw);
+                statement.Bind(20, aboutPage.SocialLinkInst);
+                statement.Bind(21, aboutPage.SocialLinkFb);
+                statement.Bind(22, aboutPage.MapX);
+                statement.Bind(23, aboutPage.MapY);
+                statement.Bind(24, aboutPage.Utd.Ticks);
                 statement.Step();
             }
         }
@@ -283,6 +281,11 @@ namespace Studio_Professional.Repository
                 }
                 return new DateTime(statement.GetInteger("Utd"));
             }
+        }
+
+        public void Dispose()
+        {
+            connection.Dispose();
         }
     }
 }
