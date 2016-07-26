@@ -9,6 +9,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.Devices.Notification;
 using Windows.Phone.UI.Input;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -53,12 +54,25 @@ namespace Studio_Professional.Views
             var rightButtonStyle = this.Resources["RightButton"] as Style;
             var textBlockStyle = this.Resources["ButtonContentTextBLock"] as Style;
             var even = true;
-            Debug.WriteLine(Count);
             for (int i = 0; i < Count; i++, even = !even)
             {
+                var loadingRing = new ProgressRing
+                {
+                    IsActive = true,
+                    Width = 50,
+                    Height = 50,
+                    Foreground = new SolidColorBrush(color: Colors.Black),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Background = new SolidColorBrush(color: Colors.Transparent),
+                };
+                Canvas.SetZIndex(loadingRing, 1);
+                ContentGrid.Children.Add(loadingRing);
+
                 response = await App.WebService.ItemPromoJsonResponse(i + 1);
                 var jsonItem = await App.Deserializer.Execute<SpecialOffersAnswer>(response.GetResponseStream());
-                if(jsonItem.Answer == JsonAnswers.NOTFOUND || jsonItem.Answer == JsonAnswers.NaN)
+                
+                if (jsonItem.Answer == JsonAnswers.NOTFOUND || jsonItem.Answer == JsonAnswers.NaN)
                 {
                     // TODO
                 }
@@ -66,18 +80,21 @@ namespace Studio_Professional.Views
                 {
                     ContentGrid.RowDefinitions.Add(new RowDefinition());
                 }
+                var image = new BitmapImage(new Uri(jsonItem.Image));
                 var button = new Button
                 {
                     Style = even ? leftButtonStyle : rightButtonStyle,
-                    Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(jsonItem.Image)) },
+                    Background = new ImageBrush { ImageSource = image },
                     Content = new TextBlock { Style = textBlockStyle, Text = jsonItem.Header }
                 };
                 button.Click += (sender, ev) =>
                 {
                     Frame.Navigate(typeof(SpecialOffersDetailsPage), jsonItem.Id + 1);
                 };
+                image.ImageOpened += (ies,iev) => { loadingRing.IsActive = false; };
                 Grid.SetRow(button, ContentGrid.RowDefinitions.Count() - 1);
-                Debug.WriteLine(ContentGrid.RowDefinitions.Count() - 1);
+                Grid.SetRow(loadingRing, ContentGrid.RowDefinitions.Count() - 1);
+                Grid.SetColumn(loadingRing, even ? 0 : 1);
                 ContentGrid.Children.Add(button);
             }
         }
