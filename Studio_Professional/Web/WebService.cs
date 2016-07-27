@@ -204,7 +204,7 @@ namespace Studio_Professional.Web
         /// Асинхронный метод инициирует запрос к скриту GetPromo.php
         /// </summary>
         /// <param name="id">id акции(не совпадает с порядковым номером)</param>
-        public async Task<WebResponse> GetPromoJsonResponse(int id)
+        public async Task<WebResponse> GetPromoJsonResponse(string id)
         {
             return await MakeRequest(
                 new UriBuilder

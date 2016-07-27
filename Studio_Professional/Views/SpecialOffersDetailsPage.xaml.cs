@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Studio_Professional.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -7,12 +9,14 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.Devices.Notification;
 using Windows.Phone.UI.Input;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента пустой страницы см. по адресу http://go.microsoft.com/fwlink/?LinkID=390556
@@ -27,7 +31,7 @@ namespace Studio_Professional.Views
         public SpecialOffersDetailsPage()
         {
             this.InitializeComponent();
-            Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
+            Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
         }
 
         /// <summary>
@@ -35,9 +39,43 @@ namespace Studio_Professional.Views
         /// </summary>
         /// <param name="e">Данные события, описывающие, каким образом была достигнута эта страница.
         /// Этот параметр обычно используется для настройки страницы.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            var loadingRing = new ProgressRing
+            {
+                IsActive = true,
+                Width = 60,
+                Height = 60,
+                Foreground = new SolidColorBrush(color: Colors.Black),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Background = new SolidColorBrush(color: Colors.Transparent)
+            };
+            CoverBorder.Child = loadingRing;
+
+            var response = await App.WebService.ItemPromoJsonResponse((int)e.Parameter);
+            var jsonItem = await App.Deserializer.Execute<SpecialOffersAnswer>(response.GetResponseStream());
+            Debug.WriteLine((int)e.Parameter);
+            Debug.WriteLine(jsonItem.Id);
+            Debug.WriteLine(jsonItem.Header);
+            Debug.WriteLine(jsonItem.Image);
+            Debug.WriteLine(jsonItem.Answer);
+            response = await App.WebService.GetPromoJsonResponse(jsonItem.Id);
+            var jsonDetails = await App.Deserializer.Execute<SpecialOfferDetailsAnswer>(response.GetResponseStream());
+
+            var image = new BitmapImage { UriSource = new Uri(jsonItem.Image) };
+            image.ImageOpened += (ev, sender) =>
+            {
+                loadingRing.IsActive = false;
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+                CoverBorder.Visibility = Visibility.Collapsed;
+            };
+            HeaderImage.Background = new ImageBrush { ImageSource = image };
+            HeaderTextBlock.Text = jsonItem.Header;
+            TimePeriodTextBlock.Text = jsonDetails.DateOpen + "-" + jsonDetails.DateClose;
+            DescriptionTextBlock.Text = jsonDetails.Description;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

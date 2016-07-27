@@ -10,10 +10,10 @@ namespace Studio_Professional.Json
     class SpecialOfferDetailsAnswer : SimpleAnswer
     {
         [DataMember(Name = "dateOpen")]
-        public DateTime DateOpen { get; set; }
+        public string DateOpen { get; set; }
 
         [DataMember(Name = "dateClose")]
-        public DateTime DateClose { get; set; }
+        public string DateClose { get; set; }
 
         [DataMember(Name = "description")]
         public string Description { get; set; }

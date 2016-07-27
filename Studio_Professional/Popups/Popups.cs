@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Studio_Professional.Popups
 {
-    public class Popup
+    public class Popups
     {
     }
 }

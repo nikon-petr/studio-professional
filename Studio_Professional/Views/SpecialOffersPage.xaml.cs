@@ -89,7 +89,7 @@ namespace Studio_Professional.Views
                 };
                 button.Click += (sender, ev) =>
                 {
-                    Frame.Navigate(typeof(SpecialOffersDetailsPage), jsonItem.Id + 1);
+                    Frame.Navigate(typeof(SpecialOffersDetailsPage), i + 1);
                 };
                 image.ImageOpened += (ies,iev) => { loadingRing.IsActive = false; };
                 Grid.SetRow(button, ContentGrid.RowDefinitions.Count() - 1);

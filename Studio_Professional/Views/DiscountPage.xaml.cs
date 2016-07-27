@@ -93,11 +93,9 @@ namespace Studio_Professional.Views
                 await new MessageDialog(json.Answer, "Ошибка").ShowAsync();
                 return;
             }
-            DiscountTextBlock.Text = DiscountTextBlock.Text != App.AppRepository.User.Data.Discount ? App.AppRepository.User.Data.Discount : DiscountTextBlock.Text;
+            DiscountTextBlock.Text = json.Answer;
             LoadingRing.IsActive = false;
             LoadingRingBackground.Visibility = Visibility.Collapsed;
-
-            await new MessageDialog(json.Answer, "").ShowAsync();
         }
     }
 }
