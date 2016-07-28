@@ -69,7 +69,7 @@ namespace Studio_Professional.Views
                 Canvas.SetZIndex(loadingRing, 1);
                 ContentGrid.Children.Add(loadingRing);
 
-                response = await App.WebService.ItemPromoJsonResponse(i + 1);
+                response = await App.WebService.ItemPromoJsonResponse((i + 1).ToString());
                 var jsonItem = await App.Deserializer.Execute<SpecialOffersAnswer>(response.GetResponseStream());
                 
                 if (jsonItem.Answer == JsonAnswers.NOTFOUND || jsonItem.Answer == JsonAnswers.NaN)
@@ -85,11 +85,12 @@ namespace Studio_Professional.Views
                 {
                     Style = even ? leftButtonStyle : rightButtonStyle,
                     Background = new ImageBrush { ImageSource = image },
-                    Content = new TextBlock { Style = textBlockStyle, Text = jsonItem.Header }
+                    Content = new TextBlock { Style = textBlockStyle, Text = jsonItem.Header },
+                    Tag = (i + 1).ToString()
                 };
                 button.Click += (sender, ev) =>
                 {
-                    Frame.Navigate(typeof(SpecialOffersDetailsPage), i + 1);
+                    Frame.Navigate(typeof(SpecialOffersDetailsPage), (sender as Button).Tag as string);
                 };
                 image.ImageOpened += (ies,iev) => { loadingRing.IsActive = false; };
                 Grid.SetRow(button, ContentGrid.RowDefinitions.Count() - 1);

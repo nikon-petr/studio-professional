@@ -186,7 +186,7 @@ namespace Studio_Professional.Web
         /// Асинхронный метод инициирует запрос к скриту GetListItemPromo.php
         /// </summary>
         /// <param name="n">Порядковый номер, начиная с 1</param>
-        public async Task<WebResponse> ItemPromoJsonResponse(int n)
+        public async Task<WebResponse> ItemPromoJsonResponse(string n)
         {
             return await MakeRequest(
                 new UriBuilder
@@ -212,7 +212,7 @@ namespace Studio_Professional.Web
                     Scheme = Scheme,
                     Host = Domain,
                     Path = PromoPath + "GetPromo.php",
-                    Query = "id=" + id.ToString()
+                    Query = "id=" + id
                 }
                 .Uri
             );

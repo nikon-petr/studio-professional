@@ -31,7 +31,7 @@ namespace Studio_Professional.Views
         public SpecialOffersDetailsPage()
         {
             this.InitializeComponent();
-            Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+            Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.Black;
         }
 
         /// <summary>
@@ -55,26 +55,21 @@ namespace Studio_Professional.Views
             };
             CoverBorder.Child = loadingRing;
 
-            var response = await App.WebService.ItemPromoJsonResponse((int)e.Parameter);
+            var response = await App.WebService.ItemPromoJsonResponse((string)e.Parameter);
             var jsonItem = await App.Deserializer.Execute<SpecialOffersAnswer>(response.GetResponseStream());
-            Debug.WriteLine((int)e.Parameter);
-            Debug.WriteLine(jsonItem.Id);
-            Debug.WriteLine(jsonItem.Header);
-            Debug.WriteLine(jsonItem.Image);
-            Debug.WriteLine(jsonItem.Answer);
             response = await App.WebService.GetPromoJsonResponse(jsonItem.Id);
             var jsonDetails = await App.Deserializer.Execute<SpecialOfferDetailsAnswer>(response.GetResponseStream());
 
             var image = new BitmapImage { UriSource = new Uri(jsonItem.Image) };
+            HeaderImage.Source = image;
             image.ImageOpened += (ev, sender) =>
             {
                 loadingRing.IsActive = false;
-                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
                 CoverBorder.Visibility = Visibility.Collapsed;
             };
-            HeaderImage.Background = new ImageBrush { ImageSource = image };
             HeaderTextBlock.Text = jsonItem.Header;
-            TimePeriodTextBlock.Text = jsonDetails.DateOpen + "-" + jsonDetails.DateClose;
+            TimePeriodTextBlock.Text = jsonDetails.DateOpen.Replace('-','.') + " - " + jsonDetails.DateClose.Replace('-', '.');
             DescriptionTextBlock.Text = jsonDetails.Description;
         }
 

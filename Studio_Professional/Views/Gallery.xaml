@@ -52,9 +52,10 @@
         <Button x:Name="GoToPrevImageButton"
                 VerticalAlignment="Center"
                 Margin="0, 12, 0, 0"
-                Padding="10, 50, 30, 50"
+                Padding="10, 50, 10, 50"
                 Grid.Row="1"
                 BorderThickness="0"
+                Background="sc#0.5,1,1,1"
                 Style="{StaticResource ButtonTransperentBackground}" 
                 Canvas.ZIndex="1"
                 Click="GoToPrevImageButton_Click">
@@ -66,9 +67,10 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Margin="0, 12, 0, 0"
-                Padding="30, 50, 10, 50"
+                Padding="10, 50, 10, 50"
                 Grid.Row="1"
                 BorderThickness="0"
+                Background="sc#0.5,1,1,1"
                 Style="{StaticResource ButtonTransperentBackground}" 
                 Canvas.ZIndex="1"
                 Click="GoToNextImageButton_Click">
@@ -76,20 +78,9 @@
                    Height="40"
                    UseLayoutRounding="True"/>
         </Button>
+
         <Pivot x:Name="GalleryPivot"
                 Grid.Row="1">
-            <PivotItem Margin="0">
-                <Image Source="ms-appx:///Resorses/Img/Gallery/65.jpg"
-                       Stretch="UniformToFill"/>
-            </PivotItem>
-            <PivotItem Margin="0">
-                <Image Source="ms-appx:///Resorses/Img/Gallery/66.png"
-                       Stretch="UniformToFill"/>
-            </PivotItem>
-            <PivotItem Margin="0">
-                <Image Source="ms-appx:///Resorses/Img/Gallery/67.png"
-                       Stretch="UniformToFill"/>
-            </PivotItem>
         </Pivot>
     </Grid>
 </Page>

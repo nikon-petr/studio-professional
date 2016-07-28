@@ -17,9 +17,8 @@
                 Grid.RowSpan="2"
                 Background="White"
                 Canvas.ZIndex="1"/>
-        <Border x:Name="HeaderImage" 
-                Background="Black">
-            <Image Source="ms-appx:///Resorses/Img/SpecialOffersDetails/header.jpg"
+        <Border Background="Black">
+            <Image x:Name="HeaderImage" 
                    Opacity="0.4"
                    Stretch="UniformToFill"/>
         </Border>
