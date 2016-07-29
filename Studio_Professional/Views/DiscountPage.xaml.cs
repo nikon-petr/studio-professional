@@ -86,7 +86,7 @@ namespace Studio_Professional.Views
             LoadingRing.IsActive = true;
             LoadingRingBackground.Visibility = Visibility.Visible;
             var response = await App.WebService.UserSaleJsonResponse(App.AppRepository.User.Data.Number);
-            var json = await App.Deserializer.Execute<SimpleAnswer>(response.GetResponseStream());
+            var json = await App.Deserializer.Execute<SaleAnswer>(response.GetResponseStream());
 
             if (json.Answer == JsonAnswers.WRONGNUMBER || json.Answer == JsonAnswers.NODATA)
             {
@@ -96,6 +96,8 @@ namespace Studio_Professional.Views
             DiscountTextBlock.Text = json.Answer;
             LoadingRing.IsActive = false;
             LoadingRingBackground.Visibility = Visibility.Collapsed;
+
+            ContentTextBlock.Text = json.Content;
         }
     }
 }

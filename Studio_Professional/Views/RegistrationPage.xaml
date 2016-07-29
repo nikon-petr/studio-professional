@@ -32,6 +32,7 @@
                    TextWrapping="Wrap" 
                    Width="Auto"
                    FontSize="48" 
+                   Foreground="White"
                    FontFamily="ms-appx:/Resorses/Fonts/GoodVibesCyr.ttf#Good Vibes Pro"/>
 
         <StackPanel Grid.Row="1"
@@ -71,13 +72,14 @@
                              Foreground="White"
                              FontSize="20"
                              FontWeight="Light"
-                             FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow" 
+                             FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow" 
                              Style="{StaticResource TextBoxStyle1}" 
                              LostFocus="NameTextBox_LostFocus" KeyDown="NameTextBox_KeyDown"/>
                 </Grid>
             </Border>
             <TextBlock x:Name="NameValidationMessage"
                        TextAlignment="Center"
+                       Foreground="White"
                        Opacity="0"
                        Margin="2">
                 <TextBlock.Projection>
@@ -160,13 +162,14 @@
                              FontSize="20"
                              FontWeight="Light"
                              InputScope="Number"
-                             FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow" 
+                             FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow" 
                              Style="{StaticResource TextBoxStyle1}" 
                              LostFocus="NumberTextBox_LostFocus" GotFocus="NumberTextBox_GotFocus"/>
                 </Grid>
             </Border>
             <TextBlock x:Name="PhoneValidationMessage"
                        TextAlignment="Center"
+                       Foreground="White"
                        Opacity="0"
                        Margin="2">
                 <TextBlock.Projection>
@@ -218,14 +221,16 @@
         <Button x:Name="SubmitButton"
                 Grid.Row="2"
                 Content="Далее"
-                FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                 FontSize="24"
                 FontWeight="Normal"
+                Foreground="White"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Width="175"
                 Margin="30"
                 Height="81"
+                BorderBrush="White"
                 BorderThickness="2" 
                 Style="{StaticResource ButtonStyle1}"
                 Click="SubmitButton_Click"/>

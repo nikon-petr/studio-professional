@@ -49,36 +49,6 @@
                    FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                    Foreground="Black"
                    FontSize="15"/>
-        <Button x:Name="GoToPrevImageButton"
-                VerticalAlignment="Center"
-                Margin="0, 12, 0, 0"
-                Padding="10, 50, 10, 50"
-                Grid.Row="1"
-                BorderThickness="0"
-                Background="sc#0.5,1,1,1"
-                Style="{StaticResource ButtonTransperentBackground}" 
-                Canvas.ZIndex="1"
-                Click="GoToPrevImageButton_Click">
-            <Image Source="ms-appx:///Resorses/Img/Gallery/left_button.png"
-                   Height="40"
-                   UseLayoutRounding="True"/>
-        </Button>
-        <Button x:Name="GoToNextImageButton"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Margin="0, 12, 0, 0"
-                Padding="10, 50, 10, 50"
-                Grid.Row="1"
-                BorderThickness="0"
-                Background="sc#0.5,1,1,1"
-                Style="{StaticResource ButtonTransperentBackground}" 
-                Canvas.ZIndex="1"
-                Click="GoToNextImageButton_Click">
-            <Image Source="ms-appx:///Resorses/Img/Gallery/right_button.png"
-                   Height="40"
-                   UseLayoutRounding="True"/>
-        </Button>
-
         <Pivot x:Name="GalleryPivot"
                 Grid.Row="1">
         </Pivot>

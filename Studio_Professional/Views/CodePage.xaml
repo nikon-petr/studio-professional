@@ -38,7 +38,7 @@
                        Margin="0, 30, 0, 0"
                        Foreground="Black"
                        FontSize="24"
-                       FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                       FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                        TextAlignment="Center"/>
         </StackPanel>
         <StackPanel Grid.Row="2">
@@ -53,15 +53,67 @@
                              FontSize="30"
                              CharacterSpacing="600"
                              MaxLength="4" 
+                             Background="White"
+                             BorderThickness="0"
                              HorizontalAlignment="Center"
-                             Style="{StaticResource PasswordBoxMyStyle}" LostFocus="PasswordBox_LostFocus"/>
+                             Style="{StaticResource PasswordBoxMyStyle}" LostFocus="PasswordBox_LostFocus" KeyDown="PasswordTextBox_KeyDown"/>
             </Border>
+            <TextBlock x:Name="CodeValidationMessage"
+                       TextAlignment="Center"
+                       Foreground="Black"
+                       Opacity="0"
+                       Margin="2">
+                <TextBlock.Projection>
+                    <PlaneProjection x:Name="projectionPhone"
+                                     CenterOfRotationX="0.5"/>
+                </TextBlock.Projection>
+                <TextBlock.Resources>
+                    <Storyboard x:Key="flipStoryBoard">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="projectionPhone"
+                                           Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="-90"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <BounceEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CodeValidationMessage"
+                                                       Storyboard.TargetProperty="Opacity">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="1">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <QuinticEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                    <Storyboard x:Key="flipBackStoryBoard">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="projectionPhone"
+                                           Storyboard.TargetProperty="RotationY">
+                            <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <QuinticEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CodeValidationMessage"
+                                                       Storyboard.TargetProperty="Opacity">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <QuinticEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </TextBlock.Resources>
+            </TextBlock>
             <TextBlock Text="Его можно получить в салоне у администратора"
                        Width="200"
-                       Margin="0, 30, 0, 0"
+                       Margin="0, 20, 0, 0"
                        Foreground="DarkGray"
                        FontSize="15"
-                       FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                       FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                        TextAlignment="Center"
                        TextWrapping="Wrap"/>
         </StackPanel>

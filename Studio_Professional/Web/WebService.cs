@@ -76,7 +76,7 @@ namespace Studio_Professional.Web
                     Scheme = Scheme,
                     Host = Domain,
                     Path = UserPath + "GetMySale.php/?",
-                    Query = "number=" + number
+                    Query = "number=" + number + "&ver=2"
                 }
                 .Uri
             );

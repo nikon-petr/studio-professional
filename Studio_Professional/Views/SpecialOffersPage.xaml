@@ -20,11 +20,11 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="SemiLight"/>
-            <Setter Property="FontFamily" Value="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
             <Setter Property="Background">
                 <Setter.Value>
-                    <ImageBrush ImageSource="ms-appx:///Resorses/Img/Main/special_offers.png"
-                                 Stretch="UniformToFill"/>
+                    <ImageBrush Stretch="UniformToFill"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -70,7 +70,8 @@
                     FontSize="35"     
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Margin="0, 23, 0, 0"/>
+                    Margin="0, 23, 0, 0" 
+                    FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
         <ScrollViewer Grid.Row="1">
             <StackPanel x:Name="ContentStackPanel"
                         Orientation="Vertical"

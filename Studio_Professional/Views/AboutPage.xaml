@@ -5,11 +5,12 @@
     xmlns:local="using:Studio_Professional.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mytoolkit="using:MyToolkit.Controls"
     mc:Ignorable="d"
-    Background="White">
+    Background="White" Loaded="Page_Loaded">
 
     <Grid>
-        <ScrollViewer>
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
             <StackPanel 
 				Orientation="Vertical">
                 <Button
@@ -23,9 +24,7 @@
                     <Button.Background>
                         <ImageBrush
                             ImageSource="ms-appx:///Resorses/Img/Common/Arrow.png"
-                            Stretch="None"
-                            AlignmentX="Center"
-                            AlignmentY="Center"/>
+                            Stretch="None"/>
                     </Button.Background>
                 </Button>
                 <Grid Margin="55, 0">
@@ -65,7 +64,7 @@
 					FontSize="35"
 					TextAlignment="Center"
 					Margin="0, 20" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
 					x:Name="TextContent"
 					Text=""
@@ -73,7 +72,14 @@
 					FontSize="17"
 					TextWrapping="WrapWholeWords"
 					Margin="15, 5" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+                <Grid x:Name="Youtube1Grid">
+                    <MediaElement x:Name="FirstVideo" 
+                                  AreTransportControlsEnabled="True"
+                                  AutoPlay="False"
+                                  Margin="15" 
+                                  Tapped="FirstVideo_Tapped"/>
+                </Grid>
                 <TextBlock
 					x:Name="TextContent2"
 					Text=""
@@ -81,7 +87,7 @@
 					FontSize="17"
 					TextWrapping="WrapWholeWords"
 					Margin="15, 5" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <Grid Margin="15, 5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -98,56 +104,68 @@
 						Width="auto" 
 						Margin="10, 0, 0, 0"/>
                 </Grid>
+                <Grid x:Name="Youtube2Grid">
+                    <MediaElement x:Name="SecondVideo" 
+                                  AreTransportControlsEnabled="True"
+                                  AutoPlay="False"
+                                  Margin="15" 
+                                  Tapped="SecondVideo_Tapped"/>
+                </Grid>
                 <TextBlock
                     x:Name="AdressHeader"
 					Text=""
 					Foreground="Black"
 					FontSize="35"
 					TextAlignment="Center"
-					Margin="0, 20" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					Margin="15, 20, 15, 5" 
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
 					x:Name="AddressText"
-					Text=""
+					TextAlignment="Center"
 					Foreground="Black"
 					FontSize="17"
 					TextWrapping="WrapWholeWords"
 					Margin="15, 5" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
                     x:Name="ContactHeader"
-					Text=""
+					TextAlignment="Center"
 					Foreground="Black"
 					FontSize="35"
-					TextAlignment="Center"
-					Margin="0, 20" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					Margin="15, 20, 15, 5" 
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
 					x:Name="ContactsText"
-					Text=""
+					TextAlignment="Center"
 					Foreground="Black"
 					FontSize="17"
 					TextWrapping="WrapWholeWords"
-					Margin="15, 5" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					Margin="15, 5, 15, 40" 
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
                     x:Name="PhoneHeader"
-					Text=""
 					Foreground="Black"
 					FontSize="35"
 					TextAlignment="Center"
-					Margin="15, 20" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					Margin="15, 0, 15, 5" 
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
                     x:Name="PhoneText"
-					Text=""
+					TextAlignment="Center"
 					Foreground="Black"
 					FontSize="17"
 					TextWrapping="WrapWholeWords"
-					Margin="15, 5" 
-					FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					Margin="15, 5, 15, 40" 
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+                <TextBlock
+                    Text="Мы в социальных сетях:"
+					Foreground="Black"
+					FontSize="35"
+					TextAlignment="Center"
+					Margin="15, 0, 15, 30" 
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
 
-                <Grid Margin="55, 0, 55, 35">
+                <Grid Margin="55, 0, 55, 40">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -162,7 +180,8 @@
 						BorderThickness="0"
                         Width="50"
                         Height="50"
-                        Style="{StaticResource ButtonTransperentBackground}">
+                        Style="{StaticResource ButtonTransperentBackground}"
+                        Click="GoToVkButton_Click">
                         <Button.Background>
                             <ImageBrush
                                 ImageSource="ms-appx:///Resorses/Img/About/vk_icon.png"/>
@@ -176,7 +195,8 @@
 						BorderThickness="0"
                         Width="50"
                         Height="50"
-                        Style="{StaticResource ButtonTransperentBackground}">
+                        Style="{StaticResource ButtonTransperentBackground}"
+                        Click="GoToFbButton_Click">
                         <Button.Background>
                             <ImageBrush
                                 ImageSource="ms-appx:///Resorses/Img/About/fb_icon.png"/>
@@ -190,7 +210,8 @@
 						BorderThickness="0"
                         Width="50"
                         Height="50"
-                        Style="{StaticResource ButtonTransperentBackground}">
+                        Style="{StaticResource ButtonTransperentBackground}"
+                        Click="GoToTwButton_Click">
                         <Button.Background>
                             <ImageBrush
                                 ImageSource="ms-appx:///Resorses/Img/About/tw_icon.png"/>
@@ -204,7 +225,8 @@
 						BorderThickness="0"
                         Width="50"
                         Height="50"
-                        Style="{StaticResource ButtonTransperentBackground}">
+                        Style="{StaticResource ButtonTransperentBackground}"
+                        Click="GoToInstButton_Click">
                         <Button.Background>
                             <ImageBrush
                                 ImageSource="ms-appx:///Resorses/Img/About/inst_icon.png"/>
@@ -213,6 +235,7 @@
                 </Grid>
                 <my:MapControl x:Name="Map"
                                MapServiceToken="MyToken"
+                               ZoomLevel="18"
                                Height="300"/>
             </StackPanel>
         </ScrollViewer>

@@ -33,9 +33,10 @@
                             AlignmentY="Center"/>
             </Button.Background>
         </Button>
-        <TextBox Text="Моя Скидка"
+        <TextBlock Text="Моя Скидка"
                  TextAlignment="Center"
                  FontSize="40" 
+                 Foreground="Black"
                  FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                  VerticalAlignment="Bottom"
                  Margin="80, 0"/>
@@ -77,7 +78,7 @@
         <StackPanel Grid.Row="2"
                     Orientation="Vertical"
                     Margin="60, 0" >
-            <TextBlock Text="Действительня при наличии кода, подтверждающего ее наличие"
+            <TextBlock x:Name="ContentTextBlock"
                        TextAlignment="Center"
                        Foreground="Black"
                        FontSize="18"
@@ -96,7 +97,7 @@
                     Margin="0, 25"
                     Padding="30, 5"
                     Style="{StaticResource ButtonStyle1}"
-                    Click="GetDiscountButton_Click"/>
+                    Click="GetDiscountButton_Click" FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
         </StackPanel>
     </Grid>
 </Page>

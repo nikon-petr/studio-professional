@@ -44,6 +44,7 @@ namespace Studio_Professional
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            this.RequestedTheme = ApplicationTheme.Light;
         }
 
         /// <summary>

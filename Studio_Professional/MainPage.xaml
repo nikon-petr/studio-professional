@@ -130,9 +130,10 @@
                         Width="160"
                         Height="160"
                         BorderThickness="0" 
-                        FontSize="25"
+                        FontSize="22"
                         FontWeight="Normal"
-                        FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                        Foreground="White"
+                        FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                         Style="{StaticResource ButtonTransperentBackground}"
                 Click="GoToAboutButton_Click">
                     <Button.Background>
@@ -150,9 +151,10 @@
                         Width="160"
                         Height="160"
                         BorderThickness="0"
-                        FontSize="25"
+                        FontSize="22"
                         FontWeight="Normal"
-                        FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                        Foreground="White"
+                        FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                         Style="{StaticResource ButtonTransperentBackground}"
                         Click="GoToDiscountButton_Click">
                     <Button.Background>
@@ -168,9 +170,10 @@
                         Margin="10"
                         Width="160"
                         Height="160"
-                        FontSize="25"
+                        FontSize="22"
                         FontWeight="Normal"
-                        FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                        Foreground="White"
+                        FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                         Click="GoToSpetialOffersButton_Click"
                 Style="{StaticResource ButtonTransperentBackground}">
                     <Button.Background>
@@ -187,9 +190,10 @@
                         Width="160"
                         Height="160"
                         BorderThickness="0" 
-                        FontSize="25"
+                        FontSize="22"
                         FontWeight="Normal"
-                        FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
+                        Foreground="White"
+                        FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                         Style="{StaticResource ButtonTransperentBackground}"
                         Click="GoToGalleryButton_Click">
                     <Button.Background>
@@ -203,6 +207,7 @@
                         Grid.ColumnSpan="2"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
+                        Padding="10, 5, 10, 7"
                         BorderBrush="Black"
                         BorderThickness="2"
                         Foreground="Black"
@@ -210,7 +215,8 @@
                         FontWeight="Normal"
                         Content="Заказать звонок"
                         Style="{StaticResource ButtonStyle1}"
-                        Click="RequesCall_Click"/>
+                        Click="RequesCall_Click" 
+                        FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
             </Grid>
 
             <Grid x:Name="RequestCallStepOne"
@@ -299,11 +305,12 @@
                            Foreground="Black"
                            FontSize="25"
                            TextAlignment="Center"
-                           Padding="15"/>
+                           Padding="15" 
+                           FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <ScrollViewer Grid.Row="1">
                     <StackPanel x:Name="CategoriesStack">
                         <StackPanel.Resources>
-                            <Style TargetType="Button" x:Key="ListItem">
+                            <Style TargetType="Button" x:Key="ListItem" BasedOn="{StaticResource ButtonTransperentBackground}">
                                 <Setter Property="Foreground" Value="Black"/>
                                 <Setter Property="FontSize" Value="17"/>
                                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -311,6 +318,7 @@
                                 <Setter Property="Padding" Value="15, 0"/>
                                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                                 <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="FontFamily" Value="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                             </Style>
                         </StackPanel.Resources>
                     </StackPanel>
@@ -395,7 +403,8 @@
                            Foreground="Black"
                            FontSize="25"
                            TextAlignment="Center"
-                           Padding="15"/>
+                           Padding="15" 
+                           FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <ProgressRing x:Name="MasterProgressRing" 
                               Grid.Row="1"
                               IsActive="True" 
@@ -407,7 +416,7 @@
                 <ScrollViewer Grid.Row="1">
                     <StackPanel x:Name="MasterStack">
                         <StackPanel.Resources>
-                            <Style TargetType="Button" x:Key="ListItem">
+                            <Style TargetType="Button" x:Key="ListItem" BasedOn="{StaticResource ButtonTransperentBackground}">
                                 <Setter Property="Foreground" Value="Black"/>
                                 <Setter Property="FontSize" Value="17"/>
                                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -415,6 +424,7 @@
                                 <Setter Property="Padding" Value="15, 0"/>
                                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                                 <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="FontFamily" Value="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                             </Style>
                         </StackPanel.Resources>
                     </StackPanel>
@@ -470,20 +480,24 @@
                        Padding="15"/>
                 <DatePicker x:Name="TargetDatePicker"
                             Grid.Row="1"
-                            Header="Дата"
+                            Header="Введите дату:"
                             Foreground="Black"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom" 
                             Style="{StaticResource DatePickerLarge}" 
-                            RequestedTheme="Light"/>
+                            FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBox x:Name="DescriptionTextBox"
                          BorderBrush="Black"
                          BorderThickness="2"
                          Grid.Row="2"
-                         Margin="90, 0"
+                         Height="65"
+                         Margin="70, 0"
                          PlaceholderText="Описание" 
                          VerticalAlignment="Top"
-                         ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+                         TextWrapping="Wrap"
+                         ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                         Style="{StaticResource TextBoxStyle2}" 
+                         FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <Button x:Name="SubmitButton"
                         Grid.Row="3"
                         Grid.ColumnSpan="2"
