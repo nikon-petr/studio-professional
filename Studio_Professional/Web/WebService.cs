@@ -2,8 +2,10 @@
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using Windows.Networking.Connectivity;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using Studio_Professional.Popups;
 
 namespace Studio_Professional.Web
 {
@@ -20,6 +22,14 @@ namespace Studio_Professional.Web
         private static string MasterPath { get; set; } = "studioProfessional/Api/Masters/";
 
         /// <summary>
+        /// Определяет доступность интент соединения
+        /// </summary>
+        public bool IsInternetAvailable()
+        {
+            return NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
+        }
+
+        /// <summary>
         /// Асинхронный метод создает запрос с указанным Uri
         /// </summary>
         /// <returns>Возвращает задачу с загружаемым ответом сервера</returns>
@@ -30,17 +40,17 @@ namespace Studio_Professional.Web
                 WebRequest request = WebRequest.Create(uri);
                 return await request.GetResponseAsync();
             }
-            catch (TaskCanceledException e)
+            catch (TaskCanceledException)
             {
-                // TODO
+                Messages.ShowErrorMessage("Ошибка", "Задача отменена");
             }
-            catch (WebException e)
+            catch (WebException)
             {
-                // TODO
+                Messages.ShowWebRequestErrorMessage();
             }
             catch (Exception e)
             {
-                // TODO
+                Messages.ShowErrorMessage(e.Message);
             }
             return null;
         }
@@ -76,7 +86,7 @@ namespace Studio_Professional.Web
                     Scheme = Scheme,
                     Host = Domain,
                     Path = UserPath + "GetMySale.php/?",
-                    Query = "number=" + number + "&ver=2"
+                    Query = "number=" + number + "&ver=2" + "&" + Guid.NewGuid().ToString() + "=0"
                 }
                 .Uri
             );
@@ -280,15 +290,23 @@ namespace Studio_Professional.Web
         /// <returns>Массив байт</returns>
         public async Task<byte[]> DownloadImage(string uri)
         {
-            return await Task.Run(async () =>
+            try
             {
-                var response = await MakeRequest(new Uri(uri));
-                using(MemoryStream ms = new MemoryStream())
+                return await Task.Run(async () =>
                 {
-                    response.GetResponseStream().CopyTo(ms);
-                    return ms.ToArray();
-                }
-            });
+                    var response = await MakeRequest(new Uri(uri));
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        response.GetResponseStream().CopyTo(ms);
+                        return ms.ToArray();
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                Messages.ShowErrorMessage("Ошибка при загрузке изображения", e.Message);
+            }
+            return null;
         }
     }
 }

@@ -230,6 +230,9 @@
       <HintPath>..\packages\MyToolkit.Extended.2.5.12.0\lib\portable-wpa81+win8\MyToolkit.Extended.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="OneSignalSDK_WP_WNS">
+      <HintPath>..\..\..\..\..\Desktop\OneSignal-WindowsPhone-SDK-1.1.0\Release\OneSignalSDK_WP81_Release\OneSignalSDK_WP_WNS.dll</HintPath>
+    </Reference>
     <Reference Include="SQLitePCL, Version=3.8.7.2, Culture=neutral, PublicKeyToken=bddade01e9c850c5, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCL.3.8.7.2\lib\wpa81\SQLitePCL.dll</HintPath>
       <Private>True</Private>

@@ -52,6 +52,7 @@ namespace Studio_Professional.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+
         }
 
         private void GoToBackButton_Click(object sender, RoutedEventArgs e)
@@ -97,15 +98,18 @@ namespace Studio_Professional.Views
                 storyboard.Begin();
                 VibrationDevice vibration = VibrationDevice.GetDefault();
                 vibration.Vibrate(TimeSpan.FromMilliseconds(30));
-                Frame.GoBack();
 
                 var response1 = await App.WebService.UserSaleJsonResponse(App.AppRepository.User.Data.Number);
-                var json1 = await App.Deserializer.Execute<SimpleAnswer>(response1.GetResponseStream());
+                var json1 = await App.Deserializer.Execute<SaleAnswer>(response1.GetResponseStream());
 
                 if (json1.Answer == JsonAnswers.OK)
                 {
                     App.AppRepository.User.Data.Discount = json1.Answer;
                     return;
+                }
+                if (Frame.CanGoBack)
+                {
+                    Frame.GoBack();
                 }
             }
             else

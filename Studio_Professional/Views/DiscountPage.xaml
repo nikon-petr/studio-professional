@@ -7,7 +7,7 @@
     xmlns:Models="using:Studio_Professional.Models"
     x:Class="Studio_Professional.Views.DiscountPage"
     mc:Ignorable="d"
-    Background="White" Loaded="Page_Loaded">
+    Background="White">
 
     <Grid>
         <Grid.ColumnDefinitions>

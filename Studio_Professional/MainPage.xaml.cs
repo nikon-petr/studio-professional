@@ -157,7 +157,7 @@ namespace Studio_Professional
 
         private void GoToDiscountButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(DiscountPage));
+            Frame.Navigate(typeof(DiscountPage), "MainPage navigated from");
         }
 
         private void GoToSpetialOffersButton_Click(object sender, RoutedEventArgs e)

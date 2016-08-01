@@ -1,4 +1,5 @@
 ﻿using Studio_Professional.Json;
+using Studio_Professional.Popups;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -68,13 +69,21 @@ namespace Studio_Professional.Models
 
         public static async Task<BitmapImage> ConvertBytesToBitmapImage(byte[] bytes)
         {
-            var bitmapImage = new BitmapImage();
-            var stream = new InMemoryRandomAccessStream();
-            await stream.WriteAsync(bytes.AsBuffer());
-            stream.Seek(0);
+            try
+            {
+                var bitmapImage = new BitmapImage();
+                var stream = new InMemoryRandomAccessStream();
+                await stream.WriteAsync(bytes.AsBuffer());
+                stream.Seek(0);
 
-            bitmapImage.SetSource(stream);
-            return bitmapImage;
+                bitmapImage.SetSource(stream);
+                return bitmapImage;
+            }
+            catch(Exception e)
+            {
+                Messages.ShowErrorMessage(e.Message);
+            }
+            return null;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Studio_Professional.Models;
 using Studio_Professional.Web;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
@@ -85,22 +86,11 @@ namespace Studio_Professional.Json
         [DataMember(Name = "Utd")]
         public string DateString { get; set; }
 
-        private DateTime utd;
-
-        public DateTime Date
-        {
-            get { return utd; }
-            set
-            {
-                utd = DateTime.ParseExact(DateString, "dd.MM.yyyy hh:mm", CultureInfo.CurrentCulture);
-            }
-        }
-
         public async Task<AboutPage> GetModel()
         {
             return await Task.Run(async () =>
             {
-                return new AboutPage
+                var aboutPage = new AboutPage
                 {
                     Id = 42,
                     Image1 = await App.WebService.DownloadImage(Image1Uri),
@@ -125,9 +115,17 @@ namespace Studio_Professional.Json
                     SocialLinkTw = SocialLinkTw,
                     SocialLinkVk = SocialLinkVk,
                     MapX = MapX,
-                    MapY = MapY,
-                    Utd = Date
+                    MapY = MapY
                 };
+                try
+                {
+                    aboutPage.Utd = DateTime.ParseExact(DateString, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
+                }
+                catch(FormatException e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+                return aboutPage;
             });
         }
     }

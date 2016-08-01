@@ -20,6 +20,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using System.Net;
+using OneSignalSDK_WP_WNS;
+using Studio_Professional.Models;
+using Studio_Professional.Popups;
 
 // Документацию по шаблону "Пустое приложение" см. по адресу http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -60,19 +63,18 @@ namespace Studio_Professional
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
-
-            //Удаляет информацию о предыдущем сеансе
-            //AppRepository.User.Delete();
 #endif
+            //OneSignal.Init("", e);
 
             WebResponse response = await WebService.AboutContentJsonResponse();
             var json = await Deserializer.Execute<AboutAnswer>(response.GetResponseStream());
             var model = await json.GetModel();
+            Debug.WriteLine(model.Utd.ToString());
             if (AppRepository.AboutPage.Content == null)
             {
                 AppRepository.AboutPage.Insert(model);
             }
-            if (AppRepository.AboutPage.Content.Utd != json.Date)
+            if (AppRepository.AboutPage.Content.Utd != model.Utd)
             {
                 AppRepository.AboutPage.UpdatePageContent(model);
             }
@@ -89,7 +91,7 @@ namespace Studio_Professional
                 rootFrame = new Frame();
 
                 // TODO: Измените это значение на размер кэша, подходящий для вашего приложения
-                rootFrame.CacheSize = 1;
+                rootFrame.CacheSize = 0;
 
                 // Задайте язык по умолчанию
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];

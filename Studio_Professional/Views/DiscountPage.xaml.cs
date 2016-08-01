@@ -27,8 +27,6 @@ namespace Studio_Professional.Views
     /// </summary>
     public sealed partial class DiscountPage : Page
     {
-        public User user;
-
         public DiscountPage()
         {
             this.InitializeComponent();
@@ -41,9 +39,26 @@ namespace Studio_Professional.Views
         /// </summary>
         /// <param name="e">Данные события, описывающие, каким образом была достигнута эта страница.
         /// Этот параметр обычно используется для настройки страницы.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            LoadingRing.IsActive = true;
+            LoadingRingBackground.Visibility = Visibility.Visible;
+            var response = await App.WebService.UserSaleJsonResponse(App.AppRepository.User.Data.Number);
+            var json = await App.Deserializer.Execute<SaleAnswer>(response.GetResponseStream());
+
+            if (json.Answer == JsonAnswers.WRONGNUMBER || json.Answer == JsonAnswers.NODATA)
+            {
+                await new MessageDialog(json.Answer, "Ошибка").ShowAsync();
+                return;
+            }
+            DiscountTextBlock.Text = json.Answer;
+            LoadingRing.IsActive = false;
+            LoadingRingBackground.Visibility = Visibility.Collapsed;
+            ContentTextBlock.Text = json.Content;
+
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -79,25 +94,6 @@ namespace Studio_Professional.Views
         private void GetDiscountButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(CodePage));
-        }
-
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadingRing.IsActive = true;
-            LoadingRingBackground.Visibility = Visibility.Visible;
-            var response = await App.WebService.UserSaleJsonResponse(App.AppRepository.User.Data.Number);
-            var json = await App.Deserializer.Execute<SaleAnswer>(response.GetResponseStream());
-
-            if (json.Answer == JsonAnswers.WRONGNUMBER || json.Answer == JsonAnswers.NODATA)
-            {
-                await new MessageDialog(json.Answer, "Ошибка").ShowAsync();
-                return;
-            }
-            DiscountTextBlock.Text = json.Answer;
-            LoadingRing.IsActive = false;
-            LoadingRingBackground.Visibility = Visibility.Collapsed;
-
-            ContentTextBlock.Text = json.Content;
         }
     }
 }

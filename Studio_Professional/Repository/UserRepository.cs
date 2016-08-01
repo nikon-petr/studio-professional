@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Studio_Professional.Popups;
 
 namespace Studio_Professional.Repository
 {
@@ -43,13 +44,24 @@ namespace Studio_Professional.Repository
         /// </summary>
         private void CreateTable()
         {
-            string query = @"CREATE TABLE IF NOT EXISTS
+            try
+            {
+                string query = @"CREATE TABLE IF NOT EXISTS
                                 User (Name VARCHAR(50) NOT NULL,
                                       Number VARCHAR(11) PRIMARY KEY NOT NULL,
                                       LastLogin INTEGER NOT NULL);";
-            using (var statement = connection.Prepare(query))
+                using (var statement = connection.Prepare(query))
+                {
+                    statement.Step();
+                }
+            }
+            catch (SQLiteException)
             {
-                statement.Step();
+                Messages.ShowDatabaseErrorMessage();
+            }
+            catch (Exception e)
+            {
+                Messages.ShowErrorMessage(e.Message);
             }
         }
 
@@ -59,19 +71,31 @@ namespace Studio_Professional.Repository
         /// <returns></returns>
         private User GetUser()
         {
-            using (var statement = connection.Prepare("SELECT Name, Number, LastLogin FROM User"))
+            try
             {
-                if (statement.Step() != SQLiteResult.ROW)
+                using (var statement = connection.Prepare("SELECT Name, Number, LastLogin FROM User"))
                 {
-                    return null;
+                    if (statement.Step() != SQLiteResult.ROW)
+                    {
+                        return null;
+                    }
+                    return new User
+                    {
+                        Name = (string)statement[0],
+                        Number = (string)statement[1],
+                        LastLogin = new DateTime((long)statement[2])
+                    };
                 }
-                return new User
-                {
-                    Name = (string)statement[0],
-                    Number = (string)statement[1],
-                    LastLogin = new DateTime((long)statement[2])
-                };
             }
+            catch (SQLiteException)
+            {
+                Messages.ShowDatabaseErrorMessage();
+            }
+            catch (Exception e)
+            {
+                Messages.ShowErrorMessage(e.Message);
+            }
+            return null;
         }
 
         /// <summary>
@@ -79,12 +103,23 @@ namespace Studio_Professional.Repository
         /// </summary>
         public void Insert(User user)
         {
-            using (var statement = connection.Prepare("INSERT INTO User(Name, Number, LastLogin) VALUES(?, ?, ?)"))
+            try
             {
-                statement.Bind(1, user.Name);
-                statement.Bind(2, user.Number);
-                statement.Bind(3, user.LastLogin.Ticks);
-                statement.Step();
+                using (var statement = connection.Prepare("INSERT INTO User(Name, Number, LastLogin) VALUES(?, ?, ?)"))
+                {
+                    statement.Bind(1, user.Name);
+                    statement.Bind(2, user.Number);
+                    statement.Bind(3, user.LastLogin.Ticks);
+                    statement.Step();
+                }
+            }
+            catch (SQLiteException)
+            {
+                Messages.ShowDatabaseErrorMessage();
+            }
+            catch(Exception e)
+            {
+                Messages.ShowErrorMessage(e.Message);
             }
         }
 
@@ -93,11 +128,22 @@ namespace Studio_Professional.Repository
         /// </summary>
         public void UpdateDate()
         {
-            using (var statement = connection.Prepare("UPDATE User Set LastLogin=? WHERE Number=?"))
+            try
             {
-                statement.Bind(1, DateTime.Now.Ticks);
-                statement.Bind(2, Data.Number);
-                statement.Step();
+                using (var statement = connection.Prepare("UPDATE User Set LastLogin=? WHERE Number=?"))
+                {
+                    statement.Bind(1, DateTime.Now.Ticks);
+                    statement.Bind(2, Data.Number);
+                    statement.Step();
+                }
+            }
+            catch (SQLiteException)
+            {
+                Messages.ShowDatabaseErrorMessage();
+            }
+            catch (Exception e)
+            {
+                Messages.ShowErrorMessage(e.Message);
             }
         }
 
@@ -106,14 +152,25 @@ namespace Studio_Professional.Repository
         /// </summary>
         public void Delete()
         {
-            if (Data != null)
+            try
             {
-                using (var statement = connection.Prepare("DELETE FROM User WHERE Number=?"))
+                if (Data != null)
                 {
-                    statement.Bind(1, Data.Number);
-                    statement.Step();
-                    userInfo = null;
+                    using (var statement = connection.Prepare("DELETE FROM User WHERE Number=?"))
+                    {
+                        statement.Bind(1, Data.Number);
+                        statement.Step();
+                        userInfo = null;
+                    }
                 }
+            }
+            catch (SQLiteException)
+            {
+                Messages.ShowDatabaseErrorMessage();
+            }
+            catch(Exception e)
+            {
+                Messages.ShowErrorMessage(e.Message);
             }
         }
     }
