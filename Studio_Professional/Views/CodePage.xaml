@@ -34,7 +34,8 @@
             <Image Source="Resources/Img/Code/lock_ico.png"
                    Width="auto"
                    Stretch="None"/>
-            <TextBlock Text="Ваш персональный код"
+            <TextBlock x:Name="HeaderTextBlock"
+                       Text="Ваш персональный код"
                        Margin="0, 30, 0, 0"
                        Foreground="Black"
                        FontSize="24"

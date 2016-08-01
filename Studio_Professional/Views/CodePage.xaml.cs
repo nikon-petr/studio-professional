@@ -83,7 +83,11 @@ namespace Studio_Professional.Views
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
-                SendCode();
+                var tabIndex = PasswordTextBox.TabIndex;
+                PasswordTextBox.IsEnabled = false;
+                PasswordTextBox.IsEnabled = true;
+                PasswordTextBox.TabIndex = tabIndex;
+                e.Handled = true;
             }
         }
 
@@ -105,7 +109,6 @@ namespace Studio_Professional.Views
                 if (json1.Answer == JsonAnswers.OK)
                 {
                     App.AppRepository.User.Data.Discount = json1.Answer;
-                    return;
                 }
                 if (Frame.CanGoBack)
                 {
@@ -123,6 +126,7 @@ namespace Studio_Professional.Views
                     vibration.Vibrate(TimeSpan.FromMilliseconds(30));
                     CodeValidationMessage.Text = "Достигнута максимальная скидка";
                     PasswordTextBox.Password = "";
+                    PasswordTextBox.Focus(FocusState.Programmatic);
                     return;
                 }
                 if (json.Answer == JsonAnswers.INCORRECTCODE)
@@ -133,6 +137,7 @@ namespace Studio_Professional.Views
                     vibration.Vibrate(TimeSpan.FromMilliseconds(30));
                     CodeValidationMessage.Text = "Код введен не верно";
                     PasswordTextBox.Password = "";
+                    PasswordTextBox.Focus(FocusState.Programmatic);
                     return;
                 }
                 if (json.Answer == JsonAnswers.WRONGCODE)
@@ -143,6 +148,7 @@ namespace Studio_Professional.Views
                     vibration.Vibrate(TimeSpan.FromMilliseconds(30));
                     CodeValidationMessage.Text = "Код неверен";
                     PasswordTextBox.Password = "";
+                    PasswordTextBox.Focus(FocusState.Programmatic);
                     return;
                 }
             }
