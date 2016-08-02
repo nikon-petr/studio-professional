@@ -21,6 +21,8 @@ using MyToolkit.Controls;
 using MyToolkit.Multimedia;
 using System.Diagnostics;
 using Windows.UI.Xaml.Media.Imaging;
+using Studio_Professional.Popups;
+using Studio_Professional.Web;
 
 // Документацию по шаблону элемента пустой страницы см. по адресу http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -38,7 +40,6 @@ namespace Studio_Professional.Views
         }
 
         private string YouTubeId1, YouTubeId2;
-        private bool YouTube1Playing = false, YouTube2Playing = false;
 
         /// <summary>
         /// Вызывается перед отображением этой страницы во фрейме.
@@ -48,6 +49,12 @@ namespace Studio_Professional.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
 
             Image1.Source = await Models.AboutPage.ConvertBytesToBitmapImage(App.AppRepository.AboutPage.Content.Image1);
             Image2.Source = await Models.AboutPage.ConvertBytesToBitmapImage(App.AppRepository.AboutPage.Content.Image2);
@@ -114,20 +121,24 @@ namespace Studio_Professional.Views
 
         private async void SecondVideo_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                return;
+            }
             if (SecondVideo.Source == null)
             {
                 var url = await YouTube.GetVideoUriAsync(YouTubeId2, YouTubeQuality.Quality360P);
                 SecondVideo.Source = url.Uri;
                 SecondVideo.AutoPlay = true;
             }
-            if (SecondVideo.CanPause)
-            {
-                SecondVideo.Pause();
-            }
-            else
-            {
-                SecondVideo.Play();
-            }
+            //if (SecondVideo.CanPause)
+            //{
+            //    SecondVideo.Pause();
+            //}
+            //else
+            //{
+            //    SecondVideo.Play();
+            //}
         }
 
         private async void GoToVkButton_Click(object sender, RoutedEventArgs e)
@@ -136,7 +147,7 @@ namespace Studio_Professional.Views
 
             if (!success)
             {
-                // TODO
+                Messages.ShowLaunchUriErrorMessage();
             }
         }
 
@@ -146,7 +157,7 @@ namespace Studio_Professional.Views
 
             if (!success)
             {
-                // TODO
+                Messages.ShowLaunchUriErrorMessage();
             }
         }
 
@@ -156,7 +167,7 @@ namespace Studio_Professional.Views
 
             if (!success)
             {
-                // TODO
+                Messages.ShowLaunchUriErrorMessage();
             }
 
         }
@@ -167,30 +178,38 @@ namespace Studio_Professional.Views
 
             if (!success)
             {
-                // TODO
+                Messages.ShowLaunchUriErrorMessage();
             }
         }
 
         private async void FirstVideo_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                return;
+            }
             if (FirstVideo.Source == null)
             {
                 var url = await YouTube.GetVideoUriAsync(YouTubeId1, YouTubeQuality.Quality360P);
                 FirstVideo.Source = url.Uri;
                 FirstVideo.AutoPlay = true;
             }
-            if (FirstVideo.CanPause)
-            {
-                FirstVideo.Pause();
-            }
-            else
-            {
-                FirstVideo.Play();
-            }
+            //if (FirstVideo.CanPause)
+            //{
+            //    FirstVideo.Pause();
+            //}
+            //else
+            //{
+            //    FirstVideo.Play();
+            //}
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                return;
+            }
             FirstVideo.Width = this.ActualWidth - 30;
             FirstVideo.Height = (this.ActualWidth - 30) / 16 * 9;
             FirstVideo.PosterSource = new BitmapImage { UriSource = new Uri("http://img.youtube.com/vi/" + YouTubeId1 + "/mqdefault.jpg") };

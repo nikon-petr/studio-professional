@@ -38,6 +38,14 @@ namespace Studio_Professional.Popups
         }
 
         /// <summary>
+        /// Показывает сообщение об ошибке при открытии браузера
+        /// </summary>
+        public static async void ShowLaunchUriErrorMessage()
+        {
+            await new MessageDialog("Ошибка при открытии браузера", "Ошибка! ;(").ShowAsync();
+        }
+
+        /// <summary>
         /// ПОказывает сообщение об ошибке
         /// </summary>
         /// <param name="title">Заголовок</param>

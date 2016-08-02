@@ -64,22 +64,22 @@ namespace Studio_Professional
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-            //OneSignal.Init("", e);
-
-            WebResponse response = await WebService.AboutContentJsonResponse();
-            var json = await Deserializer.Execute<AboutAnswer>(response.GetResponseStream());
-            var model = await json.GetModel();
-            Debug.WriteLine(model.Utd.ToString());
-            if (AppRepository.AboutPage.Content == null)
+            OneSignal.Init("2baab644-8886-4090-82ea-8aac8dfcb9ac", e);
+            if (App.WebService.IsInternetAvailable())
             {
-                AppRepository.AboutPage.Insert(model);
+                WebResponse response = await WebService.AboutContentJsonResponse();
+                var json = await Deserializer.Execute<AboutAnswer>(response.GetResponseStream());
+                var model = await json.GetModel();
+                Debug.WriteLine(model.Utd.ToString());
+                if (AppRepository.AboutPage.Content == null)
+                {
+                    AppRepository.AboutPage.Insert(model);
+                }
+                if (AppRepository.AboutPage.Content.Utd != model.Utd)
+                {
+                    AppRepository.AboutPage.UpdatePageContent(model);
+                }
             }
-            if (AppRepository.AboutPage.Content.Utd != model.Utd)
-            {
-                AppRepository.AboutPage.UpdatePageContent(model);
-            }
-
-
 
             Frame rootFrame = Window.Current.Content as Frame;
 

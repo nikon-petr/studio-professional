@@ -1,4 +1,5 @@
 ﻿using Studio_Professional.Json;
+using Studio_Professional.Popups;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,6 +43,11 @@ namespace Studio_Professional.Views
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             var response = await App.WebService.CountSlidesJsonResponse();
             var jsonCount = await App.Deserializer.Execute<SimpleAnswer>(response.GetResponseStream());
 
@@ -65,7 +71,7 @@ namespace Studio_Professional.Views
                 {
                     Source = new BitmapImage { UriSource = new Uri(jsonLink.Answer) },
                     HorizontalAlignment = HorizontalAlignment.Center,
-                    Stretch = Stretch.UniformToFill,
+                    Stretch = Stretch.Uniform,
                     Tag = i
                 };
                 var grid = new Grid();
@@ -132,16 +138,6 @@ namespace Studio_Professional.Views
                 frame.GoBack();
                 e.Handled = true;
             }
-        }
-
-        private void GoToNextImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void GoToPrevImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }

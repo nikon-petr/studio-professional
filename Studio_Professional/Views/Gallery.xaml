@@ -50,7 +50,7 @@
                    Foreground="Black"
                    FontSize="15"/>
         <Pivot x:Name="GalleryPivot"
-                Grid.Row="1">
+               Grid.Row="1">
         </Pivot>
     </Grid>
 </Page>

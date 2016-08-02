@@ -1,4 +1,5 @@
 ﻿using Studio_Professional.Json;
+using Studio_Professional.Popups;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -57,6 +58,11 @@ namespace Studio_Professional.Views
 
         private void GoToBackButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Frame.BackStack.Clear();
+                Frame.Navigate(typeof(MainPage));
+            }
             VibrationDevice vibration = VibrationDevice.GetDefault();
             vibration.Vibrate(TimeSpan.FromMilliseconds(20));
             if (Frame.CanGoBack)
@@ -67,6 +73,12 @@ namespace Studio_Professional.Views
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Frame.BackStack.Clear();
+                Frame.Navigate(typeof(MainPage));
+                e.Handled = true;
+            }
             if (Frame.CanGoBack)
             {
                 e.Handled = true;
@@ -76,7 +88,14 @@ namespace Studio_Professional.Views
 
         private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            SendCode();
+            if (App.WebService.IsInternetAvailable())
+            {
+                SendCode();
+            }
+            else
+            {
+                Messages.ShowInternetAvailableMessage();
+            }
         }
 
         private void PasswordTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -152,7 +171,6 @@ namespace Studio_Professional.Views
                     return;
                 }
             }
-            
         }
     }
 }

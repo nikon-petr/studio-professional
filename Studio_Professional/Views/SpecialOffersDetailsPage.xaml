@@ -17,11 +17,13 @@
                 Grid.RowSpan="2"
                 Background="White"
                 Canvas.ZIndex="1"/>
-        <Border Background="Black">
+        <!--<Border Background="Black">
             <Image x:Name="HeaderImage" 
                    Opacity="0.4"
                    Stretch="UniformToFill"/>
-        </Border>
+        </Border>-->
+        <Image x:Name="HeaderImage"
+                   Stretch="UniformToFill"/>
         <Button x:Name="GoToBackButton"
                 Canvas.ZIndex="2"
                 Width="55"

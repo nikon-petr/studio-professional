@@ -1,4 +1,5 @@
 ﻿using Studio_Professional.Json;
+using Studio_Professional.Popups;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -43,6 +44,11 @@ namespace Studio_Professional.Views
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             var loadingRing = new ProgressRing
             {
                 IsActive = true,
@@ -90,6 +96,13 @@ namespace Studio_Professional.Views
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Frame.BackStack.Clear();
+                Frame.Navigate(typeof(MainPage));
+                e.Handled = true;
+                return;
+            }
             Frame frame = Window.Current.Content as Frame;
             if (frame == null)
             {

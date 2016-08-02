@@ -1,5 +1,6 @@
 ﻿using Studio_Professional.Json;
 using Studio_Professional.Models;
+using Studio_Professional.Popups;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,6 +45,11 @@ namespace Studio_Professional.Views
 
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             LoadingRing.IsActive = true;
             LoadingRingBackground.Visibility = Visibility.Visible;
             var response = await App.WebService.UserSaleJsonResponse(App.AppRepository.User.Data.Number);
@@ -93,6 +99,11 @@ namespace Studio_Professional.Views
 
         private void GetDiscountButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             Frame.Navigate(typeof(CodePage));
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Studio_Professional.Json;
+using Studio_Professional.Popups;
 using Studio_Professional.Views;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,11 @@ namespace Studio_Professional
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             CallRequestData = new CallRequest();
 
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             if(categoryButtons == null)
             {
                 categoryButtons = new List<Button>();
@@ -85,6 +91,11 @@ namespace Studio_Professional
                     {
                         if (PageState == DialogStep.FirstStep)
                         {
+                            if (!App.WebService.IsInternetAvailable())
+                            {
+                                Messages.ShowInternetAvailableMessage();
+                                return;
+                            }
                             flipFromFirstToSecond.Begin();
                             PageState = DialogStep.SecondStep;
                             CallRequestData.CategoryId = category.Id;
@@ -107,6 +118,11 @@ namespace Studio_Professional
                                 {
                                     if (PageState == DialogStep.SecondStep)
                                     {
+                                        if (!App.WebService.IsInternetAvailable())
+                                        {
+                                            Messages.ShowInternetAvailableMessage();
+                                            return;
+                                        }
                                         flipFromSecondToThird.Begin();
                                         PageState = DialogStep.ThirdStep;
                                         CallRequestData.MasterId = master.Id;
@@ -130,7 +146,7 @@ namespace Studio_Professional
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            if(PageState == DialogStep.FirstStep)
+            if (PageState == DialogStep.FirstStep)
             {
                 flipFromFirstToMain.Begin();
                 PageState = DialogStep.Main;
@@ -152,28 +168,58 @@ namespace Studio_Professional
 
         private void GoToAboutButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             Frame.Navigate(typeof(AboutPage), null);
         }
 
         private void GoToDiscountButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             Frame.Navigate(typeof(DiscountPage), "MainPage navigated from");
         }
 
         private void GoToSpetialOffersButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             Frame.Navigate(typeof(SpecialOffersPage));
         }
 
         private void GoToGalleryButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             Frame.Navigate(typeof(Gallery));
         }
 
         private async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             if (PageState == DialogStep.ThirdStep)
             {
+                if (!App.WebService.IsInternetAvailable())
+                {
+                    Messages.ShowInternetAvailableMessage();
+                    return;
+                }
                 var responce = await App.WebService.SendJsonResponse(CallRequestData.MasterId, App.AppRepository.User.Data.Number,
                     DescriptionTextBox.Text, TargetDatePicker.Date.Date);
                 var json = await App.Deserializer.Execute<SimpleAnswer>(responce.GetResponseStream());
@@ -194,9 +240,78 @@ namespace Studio_Professional
             }
         }
 
-        private void RequesCall_Click(object sender, RoutedEventArgs e)
+        private async void RequesCall_Click(object sender, RoutedEventArgs e)
         {
-            if(PageState == DialogStep.Main)
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
+            if (categoryButtons == null)
+            {
+                categoryButtons = new List<Button>();
+                var response = await App.WebService.GetCategoriesJsonResponse();
+                var categories = await App.Deserializer.Execute<CategoriesAnswer>(response.GetResponseStream());
+                CategoryProgressRing.IsActive = false;
+
+                foreach (var category in categories.Categories)
+                {
+                    var button = new Button
+                    {
+                        Style = CategoriesStack.Resources["ListItem"] as Style,
+                        Content = category.Name
+                    };
+                    button.Click += async (senderv, c) =>
+                    {
+                        if (PageState == DialogStep.FirstStep)
+                        {
+                            if (!App.WebService.IsInternetAvailable())
+                            {
+                                Messages.ShowInternetAvailableMessage();
+                                return;
+                            }
+                            flipFromFirstToSecond.Begin();
+                            PageState = DialogStep.SecondStep;
+                            CallRequestData.CategoryId = category.Id;
+
+                            MasterStack.Children.Clear();
+                            masterButtons = new List<Button>(10);
+                            var res = await App.WebService.GetMasterJsonResponse(CallRequestData.CategoryId);
+                            var masters = await App.Deserializer.Execute<MastersAnswer>(res.GetResponseStream());
+                            MasterProgressRing.IsActive = false;
+
+                            foreach (var master in masters.Masters)
+                            {
+                                var btn = new Button
+                                {
+                                    Style = MasterStack.Resources["ListItem"] as Style,
+                                    Content = master.Name
+                                };
+
+                                btn.Click += (senderc, cc) =>
+                                {
+                                    if (PageState == DialogStep.SecondStep)
+                                    {
+                                        if (!App.WebService.IsInternetAvailable())
+                                        {
+                                            Messages.ShowInternetAvailableMessage();
+                                            return;
+                                        }
+                                        flipFromSecondToThird.Begin();
+                                        PageState = DialogStep.ThirdStep;
+                                        CallRequestData.MasterId = master.Id;
+                                    }
+                                };
+                                masterButtons.Add(btn);
+                                MasterStack.Children.Add(btn);
+                            }
+                        }
+                    };
+                    categoryButtons.Add(button);
+                    CategoriesStack.Children.Add(button);
+                }
+            }
+            if (PageState == DialogStep.Main)
             {
                 flipFromMainToFirst.Begin();
                 PageState = DialogStep.FirstStep;

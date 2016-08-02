@@ -1,5 +1,6 @@
 ﻿using Studio_Professional.Json;
 using Studio_Professional.Models;
+using Studio_Professional.Popups;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,7 +56,11 @@ namespace Studio_Professional.Views
 
         private async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             if (!IsNameValidated && !IsNumberValidated)
             {
                 VibrationDevice vibration = VibrationDevice.GetDefault();

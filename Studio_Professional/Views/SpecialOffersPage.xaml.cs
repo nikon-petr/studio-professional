@@ -1,4 +1,5 @@
 ﻿using Studio_Professional.Json;
+using Studio_Professional.Popups;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -44,6 +45,12 @@ namespace Studio_Professional.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            if (!App.WebService.IsInternetAvailable())
+            {
+                Messages.ShowInternetAvailableMessage();
+                return;
+            }
             var response = await App.WebService.CountPromoJsonResponse();
             var json = await App.Deserializer.Execute<SimpleAnswer>(response.GetResponseStream());
             if (int.TryParse(json.Answer, out Count))
@@ -56,19 +63,6 @@ namespace Studio_Professional.Views
             var even = true;
             for (int i = 0; i < Count; i++, even = !even)
             {
-                var loadingRing = new ProgressRing
-                {
-                    IsActive = true,
-                    Width = 50,
-                    Height = 50,
-                    Foreground = new SolidColorBrush(color: Colors.Black),
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Background = new SolidColorBrush(color: Colors.Transparent),
-                };
-                Canvas.SetZIndex(loadingRing, 1);
-                ContentGrid.Children.Add(loadingRing);
-
                 response = await App.WebService.ItemPromoJsonResponse((i + 1).ToString());
                 var jsonItem = await App.Deserializer.Execute<SpecialOffersAnswer>(response.GetResponseStream());
 
@@ -84,19 +78,31 @@ namespace Studio_Professional.Views
                 var button = new Button
                 {
                     Style = even ? leftButtonStyle : rightButtonStyle,
-                    Background = new ImageBrush { ImageSource = image},
+                    Background = new ImageBrush { ImageSource = image },
                     Content = new TextBlock { Style = textBlockStyle, Text = jsonItem.Header },
                     Tag = (i + 1).ToString()
                 };
+                //var border = new Border
+                //{
+                //    IsHitTestVisible = false,
+                //    Child = new TextBlock { Style = textBlockStyle, Text = jsonItem.Header },
+                //    Background = new SolidColorBrush(color: new Color { A = 127, R = 0, B = 0, G = 0 }),
+                //    Margin = button.Margin,
+                //    VerticalAlignment = VerticalAlignment.Center,
+                //    Width = button.Width,
+                //    Height = button.Height,
+                //    HorizontalAlignment = button.HorizontalAlignment
+                //};
                 button.Click += (sender, ev) =>
                 {
                     Frame.Navigate(typeof(SpecialOffersDetailsPage), (sender as Button).Tag as string);
                 };
-                image.ImageOpened += (ies, iev) => { loadingRing.IsActive = false; };
+                //Canvas.SetZIndex(border, 1);
                 Grid.SetRow(button, ContentGrid.RowDefinitions.Count() - 1);
-                Grid.SetRow(loadingRing, ContentGrid.RowDefinitions.Count() - 1);
-                Grid.SetColumn(loadingRing, even ? 0 : 1);
+                //Grid.SetRow(border, ContentGrid.RowDefinitions.Count() - 1);
+                //Grid.SetColumn(border, even ? 0 : 1);
                 ContentGrid.Children.Add(button);
+                //ContentGrid.Children.Add(border);
             }
         }
 
@@ -128,11 +134,6 @@ namespace Studio_Professional.Views
                 frame.GoBack();
                 e.Handled = true;
             }
-        }
-
-        private void b1_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(SpecialOffersDetailsPage));
         }
     }
 }

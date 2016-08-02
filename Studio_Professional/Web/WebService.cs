@@ -26,7 +26,7 @@ namespace Studio_Professional.Web
         /// </summary>
         public bool IsInternetAvailable()
         {
-            return NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
+            return NetworkInformation.GetInternetConnectionProfile() != null;
         }
 
         /// <summary>
