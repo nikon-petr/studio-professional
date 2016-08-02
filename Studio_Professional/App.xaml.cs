@@ -65,6 +65,7 @@ namespace Studio_Professional
             }
 #endif
             OneSignal.Init("2baab644-8886-4090-82ea-8aac8dfcb9ac", e);
+
             if (App.WebService.IsInternetAvailable())
             {
                 WebResponse response = await WebService.AboutContentJsonResponse();
