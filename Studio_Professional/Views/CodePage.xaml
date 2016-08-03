@@ -31,7 +31,7 @@
             </Button.Background>
         </Button>
         <StackPanel Grid.Row="1">
-            <Image Source="Resources/Img/Code/lock_ico.png"
+            <Image Source="ms-appx:///Resorses/Img/Code/lock_ico.png"
                    Width="auto"
                    Stretch="None"/>
             <TextBlock x:Name="HeaderTextBlock"

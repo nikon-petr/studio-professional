@@ -234,7 +234,7 @@
                     </Button>
                 </Grid>
                 <my:MapControl x:Name="Map"
-                               MapServiceToken="MyToken"
+                               MapServiceToken="KvoJxR3YtGQwQp68SFwQtw"
                                ZoomLevel="18"
                                Height="300"/>
             </StackPanel>
