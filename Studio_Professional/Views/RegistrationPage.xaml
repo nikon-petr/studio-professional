@@ -234,5 +234,18 @@
                 BorderThickness="2" 
                 Style="{StaticResource ButtonStyle1}"
                 Click="SubmitButton_Click"/>
+        <TextBlock Grid.Row="2"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   Foreground="White"
+                   Margin="50"
+                   VerticalAlignment="Bottom" 
+                   FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow">
+            Нажимая на кнопку далее, вы подтверждаете, что ознакомлены с
+            <Hyperlink NavigateUri="http://flexed.ru/studioProfessional/Studio_Professional_App_-_Private_policy.txt"
+                       Foreground="White">
+                <Underline>Политикой кофиденциальности</Underline>
+            </Hyperlink>
+        </TextBlock>
     </Grid>
 </Page>

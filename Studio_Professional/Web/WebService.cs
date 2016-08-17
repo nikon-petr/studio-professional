@@ -15,11 +15,11 @@ namespace Studio_Professional.Web
     public class WebService
     {
         private static string Scheme { get; } = "http";
-        private static string Domain { get; } = "flexed.ru";
-        private static string UserPath { get; } = "studioProfessional/Api/Users/";
-        private static string ContentPath { get; } = "studioProfessional/Api/Content/";
-        private static string PromoPath { get; } = "studioProfessional/Api/Promo/";
-        private static string MasterPath { get; set; } = "studioProfessional/Api/Masters/";
+        private static string Domain { get; } = "studioprofessional.ru";
+        private static string UserPath { get; } = "app/Api/Users/";
+        private static string ContentPath { get; } = "app/Api/Content/";
+        private static string PromoPath { get; } = "app/Api/Promo/";
+        private static string MasterPath { get; set; } = "app/Api/Masters/";
 
         /// <summary>
         /// Определяет доступность интент соединения

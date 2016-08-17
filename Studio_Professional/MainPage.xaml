@@ -217,6 +217,18 @@
                         Style="{StaticResource ButtonStyle1}"
                         Click="RequesCall_Click" 
                         FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+                <TextBlock Grid.Row="2"
+                           Grid.ColumnSpan="2"
+                           VerticalAlignment="Bottom"
+                           Margin="5"
+                           TextAlignment="Center"
+                           FontFamily="Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow">
+                    <Hyperlink NavigateUri="http://flexed.ru/studioProfessional/Studio_Professional_App_-_Private_policy.txt" 
+                               Foreground="Black"
+                               FontSize="8">
+                        <Underline>Политика конфиденциальности</Underline>
+                    </Hyperlink>
+                </TextBlock>
             </Grid>
 
             <Grid x:Name="RequestCallStepOne"

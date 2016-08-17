@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="6812Nikonpetr.StudioProfessional" Publisher="CN=2A81D8E7-92A8-445F-81D1-D7639AD4E8E0" Version="1.1.0.1" />
+  <Identity Name="6812Nikonpetr.StudioProfessional" Publisher="CN=2A81D8E7-92A8-445F-81D1-D7639AD4E8E0" Version="1.1.0.2" />
   <mp:PhoneIdentity PhoneProductId="01ecee8e-86b4-4c0e-ae27-58858a077229" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Studio Professional</DisplayName>
