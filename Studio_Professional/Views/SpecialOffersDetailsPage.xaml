@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="White">
 
-    <Grid Margin="0, -28, 0, 0">
+    <Grid Margin="0, -30, 0, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.8*"/>
             <RowDefinition/>
@@ -16,7 +16,7 @@
         <Border x:Name="CoverBorder"
                 Grid.RowSpan="2"
                 Background="White"
-                Canvas.ZIndex="-1"/>
+                Canvas.ZIndex="1"/>
         <!--<Border Background="Black">
             <Image x:Name="HeaderImage" 
                    Opacity="0.4"
