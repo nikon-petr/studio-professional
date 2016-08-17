@@ -1,11 +1,6 @@
-﻿using Studio_Professional.Json;
-using Studio_Professional.Popups;
+﻿using Studio_Professional.Popups;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;

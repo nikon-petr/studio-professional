@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Studio_Professional.Popups;
+using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Windows.Networking.Connectivity;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
-using Studio_Professional.Popups;
 
 namespace Studio_Professional.Web
 {
