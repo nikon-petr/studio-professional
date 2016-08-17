@@ -16,14 +16,14 @@
         <Border x:Name="CoverBorder"
                 Grid.RowSpan="2"
                 Background="White"
-                Canvas.ZIndex="1"/>
+                Canvas.ZIndex="-1"/>
         <!--<Border Background="Black">
             <Image x:Name="HeaderImage" 
                    Opacity="0.4"
                    Stretch="UniformToFill"/>
         </Border>-->
         <Image x:Name="HeaderImage"
-                   Stretch="UniformToFill"/>
+               Stretch="UniformToFill"/>
         <Button x:Name="GoToBackButton"
                 Canvas.ZIndex="2"
                 Width="55"
@@ -43,7 +43,7 @@
         <Border Margin="0, 83, 0, 0">
             <TextBlock x:Name="HeaderTextBlock"
                        Canvas.ZIndex="1"
-                       Text="Стрижка горячими ножницами в подарок"
+                       Text=""
                        Margin="50, 0"
                        VerticalAlignment="Center"
                        Foreground="White"
@@ -61,7 +61,7 @@
                            FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                            TextAlignment="Center"/>
                 <TextBlock x:Name="TimePeriodTextBlock"
-                           Text="15.06.16-30.06.16"
+                           Text=""
                            Margin="0, 15, 0, 0"
                            Foreground="Black"
                            FontSize="16"
@@ -73,7 +73,8 @@
                            FontSize="20"
                            FontFamily="Resources/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"
                            TextAlignment="Center"/>
-                <TextBlock x:Name="DescriptionTextBlock" Text="При использовании горячих ножниц срез запаивается и получается гладким. Сами ножницы при этом остаются холодными, а нагревание происходит непосредственно в самой точке среза. Причем нагреваются ножницы до строго определенной темппературы, которая для каждого типа волос определяется индивидуально и программируется мастером на аппарате горяцих ножниц."
+                <TextBlock x:Name="DescriptionTextBlock" 
+                           Text=""
                            Margin="50, 15, 50, 0"
                            Foreground="Black"
                            FontSize="12"

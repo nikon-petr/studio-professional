@@ -160,33 +160,19 @@
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Resorses\Img\About\fb_icon.png" />
     <Content Include="Resorses\Img\About\inst_icon.png" />
-    <Content Include="Resorses\Img\About\pic1.png" />
-    <Content Include="Resorses\Img\About\pic2.png" />
-    <Content Include="Resorses\Img\About\pic3.png" />
-    <Content Include="Resorses\Img\About\pic4.png" />
-    <Content Include="Resorses\Img\About\pic5.png" />
-    <Content Include="Resorses\Img\About\pic6.png" />
     <Content Include="Resorses\Img\About\tw_icon.png" />
     <Content Include="Resorses\Img\About\vk_icon.png" />
     <Content Include="Resorses\Img\Code\lock_ico.png" />
     <Content Include="Resorses\Img\Common\Arrow.png" />
     <Content Include="Resorses\Img\Common\Header.png" />
     <Content Include="Resorses\Img\Common\light_arrow.png" />
-    <Content Include="Resorses\Img\Gallery\65.jpg" />
-    <Content Include="Resorses\Img\Gallery\66.png" />
-    <Content Include="Resorses\Img\Gallery\67.png" />
-    <Content Include="Resorses\Img\Gallery\left_button.png" />
-    <Content Include="Resorses\Img\Gallery\right_button.png" />
     <Content Include="Resorses\Img\Login\background.jpg" />
-    <Content Include="Resorses\Img\Login\button.png" />
     <Content Include="Resorses\Img\Login\name_icon.png" />
     <Content Include="Resorses\Img\Login\number_icon.png" />
     <Content Include="Resorses\Img\Main\about.png" />
     <Content Include="Resorses\Img\Main\discount.png" />
     <Content Include="Resorses\Img\Main\gallery.png" />
     <Content Include="Resorses\Img\Main\special_offers.png" />
-    <Content Include="Resorses\Img\SpecialOffersDetails\header.jpg" />
-    <Content Include="Resorses\Img\SpecialOffers\preview.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
