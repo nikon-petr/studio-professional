@@ -26,7 +26,8 @@
                 Source="Resorses/Img/Common/Header.png"/>
         <Border Height="{Binding ElementName=HeadImage, Path=ActualHeight}"
                 VerticalAlignment="Stretch"
-                Grid.ColumnSpan="2">
+                Grid.ColumnSpan="2"
+                Background="White">
             <TextBlock x:Name="AppNameTextBlock"
                        Text="Studio professional"
                        Margin="0, 73, 0, 0"
