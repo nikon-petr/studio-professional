@@ -15,9 +15,10 @@
         </Grid.RowDefinitions>
 
         <Image Grid.ColumnSpan="2"
-               VerticalAlignment="Top"
+               VerticalAlignment="Top"               
                Source="ms-appx:///Resorses/Img/Common/Header.png"/>
         <Button x:Name="GoToBackButton"
+                Canvas.ZIndex="2"
                 Width="55"
                 Height="55"
                 VerticalAlignment="Top"
@@ -32,7 +33,7 @@
                             AlignmentY="Center"/>
             </Button.Background>
         </Button>
-        <Border VerticalAlignment="Stretch">
+        <Border VerticalAlignment="Stretch" Background="White">
             <TextBlock x:Name="AppNameTextBlock"
                        Text="Studio professional"
                        Margin="0, 73, 0, 0"
