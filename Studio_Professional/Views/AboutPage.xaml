@@ -158,12 +158,14 @@
 					Margin="15, 5, 15, 40" 
 					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
                 <TextBlock
-                    Text="Мы в социальных сетях:"
 					Foreground="Black"
 					FontSize="35"
 					TextAlignment="Center"
 					Margin="15, 0, 15, 30" 
-					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow"/>
+					FontFamily="ms-appx:/Resorses/Fonts/PT_Sans-Narrow-Web-Regular.ttf#PT Sans Narrow">
+                    Мы в социальных <LineBreak/>
+                    сетях:
+                </TextBlock>
 
                 <Grid Margin="55, 0, 55, 40">
                     <Grid.ColumnDefinitions>
