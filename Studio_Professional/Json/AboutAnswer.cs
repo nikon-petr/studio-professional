@@ -76,6 +76,9 @@ namespace Studio_Professional.Json
         [DataMember]
         public string SocialLinkFb { get; set; }
 
+        [DataMember]
+        public string SocialLinkYb { get; set; }
+
         [DataMember(Name = "Map-x")]
         public double MapX { get; set; }
 
