@@ -56,6 +56,8 @@ namespace Studio_Professional.Models
 
         public string SocialLinkFb { get; set; }
 
+        public string SocialLinkYb { get; set; }
+
         public double MapX { get; set; }
 
         public double MapY { get; set; }

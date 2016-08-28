@@ -70,8 +70,8 @@ namespace Studio_Professional
             {
                 WebResponse response = await WebService.AboutContentJsonResponse();
                 var json = await Deserializer.Execute<AboutAnswer>(response.GetResponseStream());
+                 Debug.WriteLine(json.SocialLinkYb == null);
                 var model = await json.GetModel();
-                Debug.WriteLine(model.Utd.ToString());
                 if (AppRepository.AboutPage.Content == null)
                 {
                     AppRepository.AboutPage.Insert(model);

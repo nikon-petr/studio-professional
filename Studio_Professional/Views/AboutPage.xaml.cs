@@ -1,6 +1,7 @@
 ﻿using MyToolkit.Multimedia;
 using Studio_Professional.Popups;
 using System;
+using System.Diagnostics;
 using Windows.Devices.Geolocation;
 using Windows.Phone.Devices.Notification;
 using Windows.Phone.UI.Input;
@@ -64,6 +65,7 @@ namespace Studio_Professional.Views
             GoToTwButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkTw);
             GoToFbButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkFb);
             GoToInstButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkInst);
+            GoToInstButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkYb);
 
             var mapIcon = new MapIcon();
             var position = new Geopoint(new BasicGeoposition

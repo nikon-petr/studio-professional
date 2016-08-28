@@ -63,6 +63,7 @@ namespace Studio_Professional.Repository
                     SocialLinkTw TEXT NOT NULL,
                     SocialLinkInst TEXT NOT NULL,
                     SocialLinkFb TEXT NOT NULL,
+                    SocialLinkYb TEXT,
                     MapX REAL NOT NULL,
                     MapY REAL NOT NULL,
                     Utd INTEGER NOT NULL
@@ -92,7 +93,7 @@ namespace Studio_Professional.Repository
             {
                 using (var statement = connection.Prepare(@"SELECT Id, Image1_1, Image1_2, Image1_3, Image1_4, TextHeader, TextContent,
                     YouTubeId1, TextContent2,Image2_1, Image2_2, YouTubeId2, AdressHeader, AdressText, ContactHeader, ContactText, PhoneHeader,
-                    PhoneText, SocialLinkVk, SocialLinkTw, SocialLinkInst, SocialLinkFb, MapX, MapY, Utd FROM AboutPageContent WHERE Id=42"))
+                    PhoneText, SocialLinkVk, SocialLinkTw, SocialLinkInst, SocialLinkFb, SocialLinkYb, MapX, MapY, Utd FROM AboutPageContent WHERE Id=42"))
                 {
                     if (statement.Step() != SQLiteResult.ROW)
                     {
@@ -122,9 +123,10 @@ namespace Studio_Professional.Repository
                         SocialLinkTw = (string)statement[19],
                         SocialLinkInst = (string)statement[20],
                         SocialLinkFb = (string)statement[21],
-                        MapX = statement.GetFloat(22),
-                        MapY = statement.GetFloat(23),
-                        Utd = new DateTime(statement.GetInteger(24))
+                        SocialLinkYb = (string)statement[22],
+                        MapX = statement.GetFloat(23),
+                        MapY = statement.GetFloat(24),
+                        Utd = new DateTime(statement.GetInteger(25))
                     };
                 }
             }
@@ -171,11 +173,12 @@ namespace Studio_Professional.Repository
                         SocialLinkTw,
                         SocialLinkInst,
                         SocialLinkFb,
+                        SocialLinkYb,
                         MapX,
                         MapY,
                         Utd
                     ) 
-                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 using (var statement = connection.Prepare(query))
                 {
                     statement.Bind(1, 42);
@@ -200,9 +203,10 @@ namespace Studio_Professional.Repository
                     statement.Bind(20, aboutPage.SocialLinkTw);
                     statement.Bind(21, aboutPage.SocialLinkInst);
                     statement.Bind(22, aboutPage.SocialLinkFb);
-                    statement.Bind(23, aboutPage.MapX);
-                    statement.Bind(24, aboutPage.MapY);
-                    statement.Bind(25, aboutPage.Utd.Ticks);
+                    statement.Bind(23, aboutPage.SocialLinkYb);
+                    statement.Bind(24, aboutPage.MapX);
+                    statement.Bind(25, aboutPage.MapY);
+                    statement.Bind(26, aboutPage.Utd.Ticks);
                     statement.Step();
                 }
             }
@@ -247,6 +251,7 @@ namespace Studio_Professional.Repository
                         SocialLinkTw=?,
                         SocialLinkInst=?,
                         SocialLinkFb=?,
+                        SocialLinkYb=?,
                         MapX=?,
                         MapY=?,
                         Utd=?
@@ -274,9 +279,10 @@ namespace Studio_Professional.Repository
                     statement.Bind(19, aboutPage.SocialLinkTw);
                     statement.Bind(20, aboutPage.SocialLinkInst);
                     statement.Bind(21, aboutPage.SocialLinkFb);
-                    statement.Bind(22, aboutPage.MapX);
-                    statement.Bind(23, aboutPage.MapY);
-                    statement.Bind(24, aboutPage.Utd.Ticks);
+                    statement.Bind(22, aboutPage.SocialLinkYb);
+                    statement.Bind(23, aboutPage.MapX);
+                    statement.Bind(24, aboutPage.MapY);
+                    statement.Bind(25, aboutPage.Utd.Ticks);
                     statement.Step();
                 }
                 aboutPageContent = aboutPage;
