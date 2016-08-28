@@ -161,6 +161,7 @@
     <Content Include="Resorses\Img\About\inst_icon.png" />
     <Content Include="Resorses\Img\About\tw_icon.png" />
     <Content Include="Resorses\Img\About\vk_icon.png" />
+    <Content Include="Resorses\Img\About\yt_icon.png" />
     <Content Include="Resorses\Img\Code\lock_ico.png" />
     <Content Include="Resorses\Img\Common\Arrow.png" />
     <Content Include="Resorses\Img\Common\Header.png" />
