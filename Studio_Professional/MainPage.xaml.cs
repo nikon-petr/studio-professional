@@ -173,7 +173,7 @@ namespace Studio_Professional
                 Messages.ShowInternetAvailableMessage();
                 return;
             }
-            Frame.Navigate(typeof(AboutPage), null);
+            Frame.Navigate(typeof(AboutPage));
         }
 
         private void GoToDiscountButton_Click(object sender, RoutedEventArgs e)

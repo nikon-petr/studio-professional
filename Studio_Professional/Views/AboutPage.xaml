@@ -167,9 +167,9 @@
                     сетях:
                 </TextBlock>
 
-                <Grid Margin="55, 0, 55, 40">
+                <Grid x:Name="SocialButtonsGrid" 
+                      Margin="55, 0, 55, 40">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -237,14 +237,14 @@
                     </Button>
                     <Button
 						x:Name="GoToYtButton"
-                        Grid.Column="4"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
+                        Visibility="Collapsed"
 						BorderThickness="0"
                         Width="50"
                         Height="50"
                         Style="{StaticResource ButtonTransperentBackground}"
-                        Click="GoToInstButton_Click">
+                        Click="GoToYbButton_Click">
                         <Button.Background>
                             <ImageBrush
                                 ImageSource="ms-appx:///Resorses/Img/About/yt_icon.png"/>
