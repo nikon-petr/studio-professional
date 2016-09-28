@@ -66,10 +66,9 @@ namespace Studio_Professional.Views
             GoToFbButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkFb);
             GoToInstButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkInst);
 
-            if (App.AppRepository.AboutPage.Content.SocialLinkYb == "null")
+            if (App.AppRepository.AboutPage.Content.SocialLinkYb != "null")
             {
-                //GoToYtButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkYb);
-                GoToYtButton.Tag = new Uri("http://google.com");
+                GoToYtButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkYb);
                 Grid.SetRow(GoToYtButton, 4);
                 GoToYtButton.Visibility = Visibility.Visible;
             }
