@@ -76,17 +76,17 @@ namespace Studio_Professional.Views
             }
         }
 
-        private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (App.WebService.IsInternetAvailable())
-            {
-                SendCode();
-            }
-            else
-            {
-                Messages.ShowInternetAvailableMessage();
-            }
-        }
+        //private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (App.WebService.IsInternetAvailable())
+        //    {
+        //        SendCode();
+        //    }
+        //    else
+        //    {
+        //        Messages.ShowInternetAvailableMessage();
+        //    }
+        //}
 
         private void PasswordTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -96,8 +96,19 @@ namespace Studio_Professional.Views
                 PasswordTextBox.IsEnabled = false;
                 PasswordTextBox.IsEnabled = true;
                 PasswordTextBox.TabIndex = tabIndex;
+                SendCode();
                 e.Handled = true;
             }
+        }
+
+        private void LoseFocus(object sender)
+        {
+            var control = sender as Control;
+            var isTabStop = control.IsTabStop;
+            control.IsTabStop = false;
+            control.IsTabStop = false;
+            control.IsTabStop = true;
+            control.IsTabStop = isTabStop;
         }
 
         async void SendCode()

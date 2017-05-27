@@ -65,17 +65,6 @@ namespace Studio_Professional.Views
             GoToTwButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkTw);
             GoToFbButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkFb);
             GoToInstButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkInst);
-
-            if (App.AppRepository.AboutPage.Content.SocialLinkYb != "null")
-            {
-                GoToYtButton.Tag = new Uri(App.AppRepository.AboutPage.Content.SocialLinkYb);
-                Grid.SetRow(GoToYtButton, 4);
-                GoToYtButton.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                GoToYtButton.Visibility = Visibility.Collapsed;
-            }
             
             var mapIcon = new MapIcon();
             var position = new Geopoint(new BasicGeoposition
@@ -174,16 +163,6 @@ namespace Studio_Professional.Views
         private async void GoToInstButton_Click(object sender, RoutedEventArgs e)
         {
             var success = await Windows.System.Launcher.LaunchUriAsync(GoToInstButton.Tag as Uri);
-
-            if (!success)
-            {
-                Messages.ShowLaunchUriErrorMessage();
-            }
-        }
-
-        private async void GoToYbButton_Click(object sender, RoutedEventArgs e)
-        {
-            var success = await Windows.System.Launcher.LaunchUriAsync(GoToYtButton.Tag as Uri);
 
             if (!success)
             {

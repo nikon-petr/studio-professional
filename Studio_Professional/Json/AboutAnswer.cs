@@ -116,7 +116,7 @@ namespace Studio_Professional.Json
                     SocialLinkInst = SocialLinkInst,
                     SocialLinkTw = SocialLinkTw,
                     SocialLinkVk = SocialLinkVk,
-                    SocialLinkYb = SocialLinkYb,
+                    SocialLinkYb = "null",
                     MapX = MapX,
                     MapY = MapY
                 };

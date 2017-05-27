@@ -174,7 +174,6 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <Button
@@ -234,21 +233,6 @@
                         <Button.Background>
                             <ImageBrush
                                 ImageSource="ms-appx:///Resorses/Img/About/inst_icon.png"/>
-                        </Button.Background>
-                    </Button>
-                    <Button
-						x:Name="GoToYtButton"
-                        Grid.Column="4"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-						BorderThickness="0"
-                        Width="50"
-                        Height="50"
-                        Style="{StaticResource ButtonTransperentBackground}"
-                        Click="GoToYbButton_Click">
-                        <Button.Background>
-                            <ImageBrush
-                                ImageSource="ms-appx:///Resorses/Img/About/yt_icon.png"/>
                         </Button.Background>
                     </Button>
                 </Grid>

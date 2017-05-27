@@ -57,7 +57,7 @@
                              Background="White"
                              BorderThickness="0"
                              HorizontalAlignment="Center"
-                             Style="{StaticResource PasswordBoxMyStyle}" LostFocus="PasswordBox_LostFocus" KeyDown="PasswordTextBox_KeyDown"/>
+                             Style="{StaticResource PasswordBoxMyStyle}" KeyDown="PasswordTextBox_KeyDown"/>
             </Border>
             <TextBlock x:Name="CodeValidationMessage"
                        TextAlignment="Center"
